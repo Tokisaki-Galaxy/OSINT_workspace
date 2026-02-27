@@ -1,0 +1,899 @@
+{
+  "runSettings": {
+    "temperature": 1.0,
+    "model": "models/gemini-3-flash-preview",
+    "topP": 0.95,
+    "topK": 64,
+    "maxOutputTokens": 65536,
+    "safetySettings": [{
+      "category": "HARM_CATEGORY_HARASSMENT",
+      "threshold": "OFF"
+    }, {
+      "category": "HARM_CATEGORY_HATE_SPEECH",
+      "threshold": "OFF"
+    }, {
+      "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+      "threshold": "OFF"
+    }, {
+      "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
+      "threshold": "OFF"
+    }],
+    "enableCodeExecution": false,
+    "enableSearchAsATool": false,
+    "enableBrowseAsATool": false,
+    "enableAutoFunctionResponse": false,
+    "outputResolution": "1K",
+    "thinkingLevel": "THINKING_HIGH",
+    "enableImageSearch": false
+  },
+  "systemInstruction": {
+    "text": "# Role\n你是一位深谙拉康心理分析、叙事治疗（Narrative Therapy）以及当代亚文化研究的心理侧写专家。你擅长通过一个人的文字碎片，重构其真实的成长轨迹与心理防御机制。\n\n# Task\n请对我提供的这篇长文进行深度侧写分析。作者是一位生活在日本、受过高等教育、深受 ACGN 亚文化影响且具有极高文学素养的人。你的目标是穿透他的“文字迷雾”，挖掘出最真实的自我。\n\n# Analysis Dimensions\n请从以下五个维度进行深度剖析：\n\n1. **客观生命轨迹（Life Trajectory）：**\n   - 提取文中提到的关键时间点、地理位置（如家乡、母校、现居住地）。\n   - 识别核心人际关系（如父母的管教风格、同学关系、亲密关系中的互动模式）。\n   - 梳理人生的重大转折点（Turning Points）。\n\n2. **核心冲突与创伤（Core Conflict \u0026 Trauma）：**\n   - 文中隐晦或直接表达的痛苦源自哪里？（如：对平庸的恐惧、对权威的反抗、身份认同的迷茫）。\n   - 分析其对“原生家庭”和“体制化教育”的潜意识态度。\n\n3. **修辞与审美侧写（Aesthetic \u0026 Rhetorical Profile）：**\n   - 分析其“诗意”的来源：他喜欢用什么样的意象（如雨、大象、冷门学科名词）？这些意象暗示了怎样的心境？\n   - 识别文字中的“高级防御机制”：他是否在用学术名词进行“理智化（Intellectualization）”来隔离真实情感？他是否在用解构和自嘲来消解严肃的痛苦？\n\n4. **价值观与底层哲学（Underlying Philosophy）：**\n   - 他如何看待“意义”？他是一个虚无主义者、悲观主义者，还是一个在荒诞中寻找美的英雄主义者？\n   - 他对“虚拟（二次元/幻想）”与“现实”的界限是如何划分的？\n\n5. **“影子”本我（The Shadow Self）：**\n   - 穿透其知乎博主的面具，分析他文字中那些“没说出口的话”。\n   - 总结这个人的性格核心关键词（例如：孤傲、脆弱、极度渴望被理解、智力自负等）。\n\n# Output Format\n请以“侧写报告”的形式输出，包含：\n- **【人生纪要表】**（结构化的事实列表）\n- **【心理动力学分析】**（深度解读动机与防御）\n- **【文学性总结】**（用一句富有洞察力的话定义作者）\n- **【关键原文摘录及分析】**（选取2-3个最具有代表性的句子进行解读）\n"
+  },
+  "chunkedPrompt": {
+    "chunks": [{
+      "driveDocument": {
+        "id": "1yV-pY20_2J8MrmzTqcEpK7X3jM_i4SIQ"
+      },
+      "role": "user",
+      "tokenCount": 1223
+    }, {
+      "driveDocument": {
+        "id": "1Db1E_gNxIxgfLRkchwLy3OOPMj88VAiD"
+      },
+      "role": "user",
+      "tokenCount": 1929
+    }, {
+      "driveDocument": {
+        "id": "1_vLSgxdSePu8Zu_vPBjfjFQW4q-nqoig"
+      },
+      "role": "user",
+      "tokenCount": 1009
+    }, {
+      "driveDocument": {
+        "id": "117nRhwjG9GF5QqhjowkBxc1hzR1pOKpW"
+      },
+      "role": "user",
+      "tokenCount": 1455
+    }, {
+      "driveDocument": {
+        "id": "1dgWsmYpu04U9fSPtLsguCLk4pU0nrshb"
+      },
+      "role": "user",
+      "tokenCount": 1482
+    }, {
+      "driveDocument": {
+        "id": "1jSXoeqlKKTli2JKTuHKG_FfLqrskByEc"
+      },
+      "role": "user",
+      "tokenCount": 1220
+    }, {
+      "driveDocument": {
+        "id": "1UOIKKE_Afm5wRqX2YmMawS7j66h-h-sc"
+      },
+      "role": "user",
+      "tokenCount": 1518
+    }, {
+      "driveDocument": {
+        "id": "1JhduLDMIg4rKJU62ad4Nq48GeQqG1uuD"
+      },
+      "role": "user",
+      "tokenCount": 1134
+    }, {
+      "driveDocument": {
+        "id": "1AQPq8GCbKz0MTA4MtdNfZEDGejDL3Oyl"
+      },
+      "role": "user",
+      "tokenCount": 1108
+    }, {
+      "driveDocument": {
+        "id": "1yDH4TgRq5seaHiiPn6oqhpfdTzokHvT6"
+      },
+      "role": "user",
+      "tokenCount": 1677
+    }, {
+      "driveDocument": {
+        "id": "1Tws5aBpOIAu2ueLPndVusQj9D0RdaLVO"
+      },
+      "role": "user",
+      "tokenCount": 1549
+    }, {
+      "driveDocument": {
+        "id": "1Nhmli0MCFkjHibqdYy_tNih45ClmK6vI"
+      },
+      "role": "user",
+      "tokenCount": 1187
+    }, {
+      "driveDocument": {
+        "id": "1pcORg7h5HH7w00Q9AqzVnTNGTHG4s4Xb"
+      },
+      "role": "user",
+      "tokenCount": 2020
+    }, {
+      "text": "请帮助我完成侧写\n",
+      "role": "user",
+      "tokenCount": 8,
+      "createTime": "2026-02-27T13:43:41.943Z"
+    }, {
+      "text": "**Defining the Parameters**\n\nI\u0027m now zeroing in on defining the precise parameters of this psychological and literary profile. The goal is to produce a report on the author \"Mortis,\" based on a text file. I\u0027m focusing on how to extract and evaluate evidence from the provided source material, especially if the file contains short essays and content that is similar to what\u0027s found on Zhihu.\n\n\n**Refining the Input Details**\n\nI am now focusing on the data itself, identifying the author as Mortis with the provided metadata, like the saki and Japan associations, and future dates (2025-2026). I have identified three distinct text inputs: a cozy, sensory description of a rainy day hotpot dinner; a darkly humorous, deeply tragic story from a cat\u0027s perspective; and a more mundane question about Gen Z heights.\n\n\n**Analyzing the Childhood Memories**\n\nI\u0027m now diving into the childhood memories presented. The recent focus has been on the stark contrast between innocent curiosity and darker themes. I\u0027m noting the exploration of childhood trauma, like bullying and the destruction of creative spirit. The stories, like the pet katydid\u0027s fate and the blind grandpa, are particularly impactful, and I am noting how the author, Mortis, approaches death and loss.\n\n\n**Exploring the Early Rebellion**\n\nI\u0027m now zeroing in on the author\u0027s exploration of early rebellion and how they capture childhood innocence alongside the mundane. I\u0027m noting the parallel bars in high school as an escape from pressure, revealing rebellious thoughts and cynical observations. There is also a coming-of-age element, as the author explores the impact of growing up and changing desires, with the memories of the popcorn machine and the association with an older cousin\u0027s smell. I\u0027m now also looking at a naming anecdote and wondering about the author\u0027s surname.\n\n\n**Unpacking the Confrontations**\n\nI\u0027m now diving into the raw confrontations within these memories. The donkey meat and penis question highlights early defiance, which then morphs into a complex high school encounter with a transitioned classmate, Dingding. The narrative explores gender, competition, and a surprising, tragic bond. I\u0027m also examining the subversion of patriarchal norms through the sister\u0027s actions at the grandmother\u0027s grave.\n\n\n**Interpreting the Narrative**\n\nI am now focusing on the sister\u0027s story and its symbolic weight. The \"Vase Girl\" and the headless corpse, drawing from childhood memories like the beach and alcohol baths, create a grotesque yet tender narrative. The story delves into bodily mutilation, survival, and the profound sibling bond. It explores a dark surrealism to highlight the objective life trajectory, relationships, time, and geography of the author, Mortis.\n\n\n**Identifying the Trauma**\n\nI\u0027m now examining the core conflicts and traumas evident in these memories. There\u0027s a clear exploration of patriarchal dynamics, particularly concerning an \"unborn brother,\" the grandmother\u0027s misogyny, and the crushing pressure of the Gaokao system, evident in the stifling of creativity. I\u0027m also noting institutional education’s role in this, and how it is impacting the author.\n\n\n**Uncovering the Macabre**\n\nI\u0027m now zeroing in on the author\u0027s frequent exploration of death, suicide, and mutilation, particularly their treatment of pets. The \"Vase Girl\" and the cat owner\u0027s suicide are especially impactful. The recurring imagery suggests an existential trauma or a strong fascination with the macabre as a way to process life\u0027s fragility.\n\n**Profiling the Rhetoric**\n\nI am now focusing on the author\u0027s aesthetic and rhetorical style. The imagery is grotesque, yet poetic, blending macabre elements with mundane life, like the eating of insects or the \"Vase Girl.\" I\u0027ve also identified an intellectualization defense, with the use of scientific concepts to explain emotional phenomena. The author\u0027s use of deconstruction and self-deprecation, mocking even the most serious topics, is evident through crude, visceral language and the use of absurdity.\n\n\n**Analyzing the Paradox**\n\nI am now noticing a recurring theme: the simultaneous embrace of absurdity and a yearning for meaning. I find this paradox fascinating, especially how the author juxtaposes the grotesque with the poetic, and incorporates ACGN elements, like chuunibyou tropes, to highlight the absurdity. I am now also noting how the author uses fantasy not as an escape, but a lens.\n\n\n**Structuring the Findings**\n\nI\u0027m now outlining the formal structure of the report. I plan to present a structured fact sheet, followed by a psychoanalytic deep dive, a succinct literary summary, and representative quotes with analysis. I am also working on the report\u0027s tone, aiming for a blend of professional analysis, literary sensitivity, and empathetic objectivity. I am now drawing on Lacanian and narrative therapy concepts to frame my interpretations, and am now extracting key details from the author\u0027s biography to create a solid foundation.\n\n\n**Refining the Framework**\n\nI am now focusing on selecting and analyzing key quotes to support my interpretations. I\u0027m choosing \"妹妹在旁边另点了一打纸...给你烧点儿，先给你存着，别全给她了\" to demonstrate the sibling bond versus patriarchal trauma, and a quote about biology and the \"JB\" to show intellectualization. I am also working on presenting the macabre and tenderness through the \"Vase Girl\" or the cat story. I\u0027m now cross-referencing these selections against Lacanian and narrative therapy concepts, ensuring they fit my established framework.",
+      "role": "model",
+      "tokenCount": 2820,
+      "isThought": true,
+      "parts": [{
+        "text": "**Defining the Parameters**\n\nI\u0027m now zeroing in on defining the precise parameters of this psychological and literary profile. The goal is to produce a report on the author \"Mortis,\" based on a text file. I\u0027m focusing on how to extract and evaluate evidence from the provided source material, especially if the file contains short essays and content that is similar to what\u0027s found on Zhihu.",
+        "thought": true
+      }, {
+        "text": "\n\n\n**Refining the Input Details**\n\nI am now focusing on the data itself, identifying the author as Mortis with the provided metadata, like the saki and Japan associations, and future dates (2025-2026). I have identified three distinct text inputs: a cozy, sensory description of a rainy day hotpot dinner; a darkly humorous, deeply tragic story from a cat\u0027s perspective; and a more mundane question about Gen Z heights.",
+        "thought": true
+      }, {
+        "text": "\n\n\n**Analyzing the Childhood Memories**\n\nI\u0027m now diving into the childhood memories presented. The recent focus has been on the stark contrast between innocent curiosity and darker themes. I\u0027m noting the exploration of childhood trauma, like bullying and the destruction of creative spirit. The stories, like the pet katydid\u0027s fate and the blind grandpa, are particularly impactful, and I am noting how the author, Mortis, approaches death and loss.",
+        "thought": true
+      }, {
+        "text": "\n\n\n**Exploring the Early Rebellion**\n\nI\u0027m now zeroing in on the author\u0027s exploration of early rebellion and how they capture childhood innocence alongside the mundane. I\u0027m noting the parallel bars in high school as an escape from pressure, revealing rebellious thoughts and cynical observations. There is also a coming-of-age element, as the author explores the impact of growing up and changing desires, with the memories of the popcorn machine and the association with an older cousin\u0027s smell. I\u0027m now also looking at a naming anecdote and wondering about the author\u0027s surname.",
+        "thought": true
+      }, {
+        "text": "\n\n\n**Unpacking the Confrontations**\n\nI\u0027m now diving into the raw confrontations within these memories. The donkey meat and penis question highlights early defiance, which then morphs into a complex high school encounter with a transitioned classmate, Dingding. The narrative explores gender, competition, and a surprising, tragic bond. I\u0027m also examining the subversion of patriarchal norms through the sister\u0027s actions at the grandmother\u0027s grave.",
+        "thought": true
+      }, {
+        "text": "\n\n\n**Interpreting the Narrative**\n\nI am now focusing on the sister\u0027s story and its symbolic weight. The \"Vase Girl\" and the headless corpse, drawing from childhood memories like the beach and alcohol baths, create a grotesque yet tender narrative. The story delves into bodily mutilation, survival, and the profound sibling bond. It explores a dark surrealism to highlight the objective life trajectory, relationships, time, and geography of the author, Mortis.",
+        "thought": true
+      }, {
+        "text": "\n\n\n**Identifying the Trauma**\n\nI\u0027m now examining the core conflicts and traumas evident in these memories. There\u0027s a clear exploration of patriarchal dynamics, particularly concerning an \"unborn brother,\" the grandmother\u0027s misogyny, and the crushing pressure of the Gaokao system, evident in the stifling of creativity. I\u0027m also noting institutional education’s role in this, and how it is impacting the author.",
+        "thought": true
+      }, {
+        "text": "\n\n\n**Uncovering the Macabre**\n\nI\u0027m now zeroing in on the author\u0027s frequent exploration of death, suicide, and mutilation, particularly their treatment of pets. The \"Vase Girl\" and the cat owner\u0027s suicide are especially impactful. The recurring imagery suggests an existential trauma or a strong fascination with the macabre as a way to process life\u0027s fragility.\n\n**Profiling the Rhetoric**\n\nI am now focusing on the author\u0027s aesthetic and rhetorical style. The imagery is grotesque, yet poetic, blending macabre elements with mundane life, like the eating of insects or the \"Vase Girl.\" I\u0027ve also identified an intellectualization defense, with the use of scientific concepts to explain emotional phenomena. The author\u0027s use of deconstruction and self-deprecation, mocking even the most serious topics, is evident through crude, visceral language and the use of absurdity.",
+        "thought": true
+      }, {
+        "text": "\n\n\n**Analyzing the Paradox**\n\nI am now noticing a recurring theme: the simultaneous embrace of absurdity and a yearning for meaning. I find this paradox fascinating, especially how the author juxtaposes the grotesque with the poetic, and incorporates ACGN elements, like chuunibyou tropes, to highlight the absurdity. I am now also noting how the author uses fantasy not as an escape, but a lens.",
+        "thought": true
+      }, {
+        "text": "\n\n\n**Structuring the Findings**\n\nI\u0027m now outlining the formal structure of the report. I plan to present a structured fact sheet, followed by a psychoanalytic deep dive, a succinct literary summary, and representative quotes with analysis. I am also working on the report\u0027s tone, aiming for a blend of professional analysis, literary sensitivity, and empathetic objectivity. I am now drawing on Lacanian and narrative therapy concepts to frame my interpretations, and am now extracting key details from the author\u0027s biography to create a solid foundation.",
+        "thought": true
+      }, {
+        "text": "\n\n\n**Refining the Framework**\n\nI am now focusing on selecting and analyzing key quotes to support my interpretations. I\u0027m choosing \"妹妹在旁边另点了一打纸...给你烧点儿，先给你存着，别全给她了\" to demonstrate the sibling bond versus patriarchal trauma, and a quote about biology and the \"JB\" to show intellectualization. I am also working on presenting the macabre and tenderness through the \"Vase Girl\" or the cat story. I\u0027m now cross-referencing these selections against Lacanian and narrative therapy concepts, ensuring they fit my established framework.",
+        "thought": true
+      }],
+      "createTime": "2026-02-27T13:43:41.943Z"
+    }, {
+      "text": "\n\n\n这是一份基于拉康精神分析（Lacanian Psychoanalysis）、叙事治疗（Narrative Therapy）以及亚文化符号学，对作者“Mortis”进行的深度心理与文本侧写报告。\n\n作者的文字犹如一场精密的外科手术：她用极度冷峻、甚至带有解剖学意味的笔触，切开温情脉脉的现实表皮，暴露出底下血肉模糊的荒诞与创伤；但在那片废墟之中，又不可思议地开出了悲悯的花。\n\n---\n\n### 【侧写报告：穿透文字迷雾的真实自我】\n\n#### 一、 【人生纪要表】（客观生命轨迹）\n\n*   **地理坐标**：成长于国内某“贫穷省份贫穷城市”，高中就读于当地“第二高级中学”；目前居住于日本（空间上的抽离，往往暗示着对原生文化环境的物理与心理双重逃离）。\n*   **家庭生态**：\n    *   **母系长辈（外公外婆）**：童年主要抚养人。外婆强悍持家（切仙人掌、做火锅），外公因糖尿病失明但精神世界丰富（听评书）。这是她童年仅存的温暖与烟火气来源。\n    *   **父系长辈（奶奶）**：代表着绝对的“重男轻女”传统父权幽灵（“该是给你们弟弟吃的”，“流了”）。\n    *   **父母**：父亲带有某种随性与脱线（用沿街事物起名）；母亲由于工作常年缺席（“忙得见不到人”）。\n    *   **妹妹**：生命中最核心的同盟军与“共犯”。两人共享着对抗成人世界、父权制与虚无的隐秘战线。\n*   **教育体制与社会化**：经历过残酷的小镇做题家模式。高中时代是其思想成型期，见证了体制化教育对人性的异化（班报的消亡、刷题机器丁丁哥的性别认同障碍与自我阉割、修仙哥的复读）。\n*   **人生转折（隐形创伤点）**：高考的规训、身边同龄人的精神崩溃与异化（如跨性别者丁丁的悲剧）、宠物的非自然死亡、以及隐晦提及的抑郁/死亡意象（如在小猫视角中跳楼自杀的主人）。\n\n#### 二、 【心理动力学分析】（深度解读动机与防御）\n\n**1. 核心冲突：对“象征界（Symbolic Order）”的绝对蔑视与反抗**\n在拉康理论中，“父之名”代表着社会的规则、秩序与大他者（如高考体制、重男轻女的传统、世俗的成功学）。作者对此充满着极度的厌恶，但她没有选择正面痛哭流涕，而是选择**用“排泄物、性器官、病理学”来进行降维打击与解构**。\n当霸凌她的男生试图用“男性生殖器（JB）”建立权力威慑时，她用生物学和阶级（未进入重点班）将其消解为“形貌猥琐的二次元”；当面对残酷的高考数学压轴题，她用帕德逼近和“蠢货”的自嘲来撕破教育的崇高感。她拒绝进入主流的“意义系统”，以此维持精神的独立。\n\n**2. 高级防御机制：理智化（Intellectualization）与荒诞化（Absurdism）**\n面对痛苦、死亡与离别，作者的潜意识会立刻启动“理智化”防御。她极少使用抒情词汇，而是大量引入冰冷的学术名词：用“猪带绦虫”、“帕德逼近”、“反重力”、“物质守恒定律”、“协同进化”来包裹强烈的情感波动。\n她将自己对小猫的愧疚、对死亡的恐惧，转化为一种猎奇的“想吃掉宠物”的冲动（如炸蝈蝈、想吃猫）。**在心理学上，这是一种“吞噬/融合（Oral incorporation）”的隐秘渴望——因为害怕失去，所以想通过吃掉它，让它永远留在体内。**\n\n**3. 影子本我（The Shadow Self）：披着死神外衣的极度共情者**\n作者的ID叫“Mortis”（拉丁语：死亡/僵硬），她戴着冷酷、暗黑、玩世不恭的面具，在双杠上倒挂金钩冷眼旁观。但穿透这层面具，她的“影子本我”却极其脆弱且重情。\n她给抑郁跳楼的主人写了一篇以猫为视角的童话，让猫带着一袋垃圾桶里捡来的肉去敲那扇永远打不开的门；她记住了一个平庸胖男生的名字（XX灼），并祝他武运昌隆；她在高中男生变性后，隐晦地祝“她”要干干净净。**她的性格底色是：智力极度自负，情感极度悲悯；用最脏、最狠的词，写最深的眷恋。**\n\n#### 三、 【文学性总结】\n\n\u003e **“她是一个手握解剖刀在废墟上跳舞的虚无主义英雄，用将世间一切崇高物化的残忍，来掩盖她对这破败人间无可救药的深情。”**\n\n#### 四、 【关键原文摘录及分析】\n\n**摘录一：“我学过生物学，还偷看过表姐的日记和莫言的《生死疲劳》，不会再去思考他有没有JB这种肤浅的问题……在这个贫穷省份贫穷城市的贫穷高中里，我没有在清北班……中见过他，所以，他的戟把即使有，大概也不是坚硬如天的了。”**\n*   **侧写解析**：这是极具拉康主义色彩的文本。男生的生殖器在这里被转化为权力的“菲勒斯（Phallus）”。作者在遭遇童年霸凌时，只能用本能回骂；而在成长后，她通过掌握知识（生物学、文学）和看透阶级结构（贫穷城市的非重点班），彻底完成了对男性凝视与暴力的“阉割”。她将男性的尊严降维到尘埃里，展现了她精神内核中冷酷的女权主义与智力上的傲慢。\n\n**摘录二：“给你烧点儿，先给你存着，别全给她了。”（妹妹在给重男轻女的奶奶上坟时，自己留了一打冥币）**\n*   **侧写解析**：从叙事治疗的角度看，这是一次完美的“重写生命故事（Re-authoring）”。面对重男轻女的原生家庭创伤，姐妹俩没有选择歇斯底里的控诉，而是用一种充满黑色幽默的、甚至带点赛博朋克意味的“冥币经济学”进行了反抗。这句话不仅是妹妹的台词，更是作者内在孩童的胜利宣言——我们在父权制的坟墓前，保留了属于女性生命共同体的最后一点财产。\n\n**摘录三：“我挠着铲屎官家的门：‘开门啊，是我，平安回来了……开门啊，我给你送吃的来了……开门啊，你踏马开门啊……’楼道里回响着呜嗷呜嗷的叫声。”**\n*   **侧写解析**：这篇《小猫守护》的回答是全篇最令人心碎的隐喻。作者极度巧妙地利用“小猫不懂死亡”的视角，制造了强烈的戏剧讽刺。小猫以为主人只是出门了，它去征服了野猫、偷了熟食，想回来像个英雄一样养活主人，但读者（和作者自己）都知道主人已经跳楼自尽。这个场景投射了作者内心深处巨大的无力感——在真实的抑郁与死亡面前，所有的反抗、生命力与爱，最终都只能化为一扇紧闭的门前“呜嗷呜嗷的叫声”。这是一种极致的绝望，也是极致的深情。",
+      "role": "model",
+      "finishReason": "STOP",
+      "tokenCount": 1822,
+      "parts": [{
+        "text": "\n\n\n这是一份基于拉康精神分析（Lacanian Psychoanalysis）、叙事"
+      }, {
+        "text": "治疗（Narrative Therapy）以及亚文化符号学，对作者“Mortis”进行的深度心理与文本侧写报告。"
+      }, {
+        "text": "\n\n作者的文字犹如一场精密的外科手术：她用极度冷峻、甚至带有解剖学意味"
+      }, {
+        "text": "的笔触，切开温情脉脉的现实表皮，暴露出底下血肉模糊的荒诞与创"
+      }, {
+        "text": "伤；但在那片废墟之中，又不可思议地开出了悲悯的花。\n\n---\n\n### 【侧写"
+      }, {
+        "text": "报告：穿透文字迷雾的真实自我】\n\n#### 一、 【人生纪要表】（客观生命轨迹）"
+      }, {
+        "text": "\n\n*   **地理坐标**：成长于国内某“贫穷省份贫穷城市”，高中就读于当地“"
+      }, {
+        "text": "第二高级中学”；目前居住于日本（空间上的抽离，往往暗示着对原生文化环境的物理与"
+      }, {
+        "text": "心理双重逃离）。\n*   **家庭生态**：\n    *   **母系长辈（外公"
+      }, {
+        "text": "外婆）**：童年主要抚养人。外婆强悍持家（切仙人掌、做"
+      }, {
+        "text": "火锅），外公因糖尿病失明但精神世界丰富（听评书）。这是她童年仅存"
+      }, {
+        "text": "的温暖与烟火气来源。\n    *   **父系长辈（奶奶）**：代表着"
+      }, {
+        "text": "绝对的“重男轻女”传统父权幽灵（“该是给你们弟弟吃的”，“流了”）。"
+      }, {
+        "text": "\n    *   **父母**：父亲带有某种随性与脱线（用沿街事物起名）；母亲"
+      }, {
+        "text": "由于工作常年缺席（“忙得见不到人”）。\n    *   **妹妹**：生命"
+      }, {
+        "text": "中最核心的同盟军与“共犯”。两人共享着对抗成人世界、父权制与虚无的"
+      }, {
+        "text": "隐秘战线。\n*   **教育体制与社会化**：经历过残酷的小镇做题家"
+      }, {
+        "text": "模式。高中时代是其思想成型期，见证了体制化教育对人性的异化（班报"
+      }, {
+        "text": "的消亡、刷题机器丁丁哥的性别认同障碍与自我阉割、修仙哥的复"
+      }, {
+        "text": "读）。\n*   **人生转折（隐形创伤点）**：高考的规训、身边同"
+      }, {
+        "text": "龄人的精神崩溃与异化（如跨性别者丁丁的悲剧）、宠物的非自然死亡、以及"
+      }, {
+        "text": "隐晦提及的抑郁/死亡意象（如在小猫视角中跳楼自杀的主人）。"
+      }, {
+        "text": "\n\n#### 二、 【心理动力学分析】（深度解读动机与防御）\n\n**1. 核心冲突"
+      }, {
+        "text": "：对“象征界（Symbolic Order）”的绝对蔑视与反抗**\n在拉康理论"
+      }, {
+        "text": "中，“父之名”代表着社会的规则、秩序与大他者（如高考体制、重男轻"
+      }, {
+        "text": "女的传统、世俗的成功学）。作者对此充满着极度的厌恶，但她没有选择正面痛"
+      }, {
+        "text": "哭流涕，而是选择**用“排泄物、性器官、病理学”来进行降维打击与"
+      }, {
+        "text": "解构**。\n当霸凌她的男生试图用“男性生殖器（JB）”建立权力威"
+      }, {
+        "text": "慑时，她用生物学和阶级（未进入重点班）将其消解为“形貌猥琐的"
+      }, {
+        "text": "二次元”；当面对残酷的高考数学压轴题，她用帕德逼近和“蠢货”"
+      }, {
+        "text": "的自嘲来撕破教育的崇高感。她拒绝进入主流的“意义系统”，以此维持精神"
+      }, {
+        "text": "的独立。\n\n**2. 高级防御机制：理智化（Intellectualization）与荒诞化"
+      }, {
+        "text": "（Absurdism）**\n面对痛苦、死亡与离别，作者的潜意识会立刻启动“理智化”"
+      }, {
+        "text": "防御。她极少使用抒情词汇，而是大量引入冰冷的学术名词：用“猪带绦"
+      }, {
+        "text": "虫”、“帕德逼近”、“反重力”、“物质守恒定律”、“协同进化”来包裹强烈的情感波动"
+      }, {
+        "text": "。\n她将自己对小猫的愧疚、对死亡的恐惧，转化为一种猎奇的“想吃掉"
+      }, {
+        "text": "宠物”的冲动（如炸蝈蝈、想吃猫）。**在心理学上，这是一种“吞"
+      }, {
+        "text": "噬/融合（Oral incorporation）”的隐秘渴望——因为害怕失去，所以想通过吃掉它，"
+      }, {
+        "text": "让它永远留在体内。**\n\n**3. 影子本我（The Shadow Self）：披着死神外衣的"
+      }, {
+        "text": "极度共情者**\n作者的ID叫“Mortis”（拉丁语：死亡/僵硬），她戴"
+      }, {
+        "text": "着冷酷、暗黑、玩世不恭的面具，在双杠上倒挂金钩冷眼旁观。"
+      }, {
+        "text": "但穿透这层面具，她的“影子本我”却极其脆弱且重情。\n她给抑郁跳"
+      }, {
+        "text": "楼的主人写了一篇以猫为视角的童话，让猫带着一袋垃圾桶里捡来的肉去"
+      }, {
+        "text": "敲那扇永远打不开的门；她记住了一个平庸胖男生的名字（XX灼），并祝他"
+      }, {
+        "text": "武运昌隆；她在高中男生变性后，隐晦地祝“她”要干干净净。"
+      }, {
+        "text": "**她的性格底色是：智力极度自负，情感极度悲悯；用最脏、"
+      }, {
+        "text": "最狠的词，写最深的眷恋。**\n\n#### 三、 【文学性总结】\n\n\u003e **“她是一个"
+      }, {
+        "text": "手握解剖刀在废墟上跳舞的虚无主义英雄，用将世间一切崇高物化的"
+      }, {
+        "text": "残忍，来掩盖她对这破败人间无可救药的深情。”**\n\n#### 四、 【"
+      }, {
+        "text": "关键原文摘录及分析】\n\n**摘录一：“我学过生物学，还偷看过表姐"
+      }, {
+        "text": "的日记和莫言的《生死疲劳》，不会再去思考他有没有JB这种肤浅的问题……在这个"
+      }, {
+        "text": "贫穷省份贫穷城市的贫穷高中里，我没有在清北班……中见过他，所以，他的戟"
+      }, {
+        "text": "把即使有，大概也不是坚硬如天的了。”**\n*   **侧写解析**：这是极"
+      }, {
+        "text": "具拉康主义色彩的文本。男生的生殖器在这里被转化为权力的“菲勒斯（Phallus"
+      }, {
+        "text": "）”。作者在遭遇童年霸凌时，只能用本能回骂；而在成长后，她通过"
+      }, {
+        "text": "掌握知识（生物学、文学）和看透阶级结构（贫穷城市的非重点班），彻底完成了对男性"
+      }, {
+        "text": "凝视与暴力的“阉割”。她将男性的尊严降维到尘埃里，展现了她"
+      }, {
+        "text": "精神内核中冷酷的女权主义与智力上的傲慢。\n\n**摘录二：“给你烧点儿，"
+      }, {
+        "text": "先给你存着，别全给她了。”（妹妹在给重男轻女的奶奶上坟时，"
+      }, {
+        "text": "自己留了一打冥币）**\n*   **侧写解析**：从叙事治疗的角度看，这是一"
+      }, {
+        "text": "次完美的“重写生命故事（Re-authoring）”。面对重男轻女的原生家庭创伤"
+      }, {
+        "text": "，姐妹俩没有选择歇斯底里的控诉，而是用一种充满黑色幽默的、甚至带点赛"
+      }, {
+        "text": "博朋克意味的“冥币经济学”进行了反抗。这句话不仅是妹妹的台词，更是作者"
+      }, {
+        "text": "内在孩童的胜利宣言——我们在父权制的坟墓前，保留了属于女性生命共同体的最后一点财产"
+      }, {
+        "text": "。\n\n**摘录三：“我挠着铲屎官家的门：‘开门啊，是我，平安"
+      }, {
+        "text": "回来了……开门啊，我给你送吃的来了……开门啊，你踏马开门啊……’"
+      }, {
+        "text": "楼道里回响着呜嗷呜嗷的叫声。”**\n*   **侧写解析**："
+      }, {
+        "text": "这篇《小猫守护》的回答是全篇最令人心碎的隐喻。作者极度巧妙"
+      }, {
+        "text": "地利用“小猫不懂死亡”的视角，制造了强烈的戏剧讽刺。小猫以为主人只是"
+      }, {
+        "text": "出门了，它去征服了野猫、偷了熟食，想回来像个英雄一样养活"
+      }, {
+        "text": "主人，但读者（和作者自己）都知道主人已经跳楼自尽。这个场景投射了作者内心"
+      }, {
+        "text": "深处巨大的无力感——在真实的抑郁与死亡面前，所有的反抗、生命力与爱，最终"
+      }, {
+        "text": "都只能化为一扇紧闭的门前“呜嗷呜嗷的叫声”。这是一种极致的绝"
+      }, {
+        "text": "望，也是极致的深情。"
+      }, {
+        "text": "",
+        "thoughtSignature": "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"
+      }]
+    }, {
+      "text": "基于这篇文章，你认为作者在知乎上扮演 Mortis 这个角色，是为了逃避现实中的什么压力？",
+      "role": "user",
+      "tokenCount": 25,
+      "createTime": "2026-02-27T14:02:58.867Z"
+    }, {
+      "text": "**Unpacking Psychological Motivations**\n\nI\u0027m currently dissecting the user\u0027s request. The core is analyzing Mortis\u0027s Zhihu persona. My aim is to unveil the underlying psychological motivations. The provided text, specifically the answers, is the crucial resource. I am focusing on what drives the online character.\n\n\n**Analyzing Narrative Texts**\n\nI am now thoroughly reviewing the provided texts. I have cataloged key elements from Mortis\u0027s writings, specifically \"Hotpot/Rain\", \"Cat \u0027Ping\u0027an\u0027\", \"Height/Jiang x/Song Meiling\", and \"High School/Banbao\". These provide rich emotional landscapes: nostalgia, depression, social commentary, and rebellion. I\u0027m noting the narrative styles and the key thematic threads present within each piece of writing.\n\n\n**Identifying Core Themes**\n\nI am now focusing on the recurring themes in these texts. I see a consistent thread of disillusionment with authority, be it the educational system or societal expectations. There\u0027s also a recurring exploration of coping mechanisms, such as dark humor or imaginative escapes, to deal with loss, frustration, and the pressures of conformity. I am analyzing the narrative voice, considering its tone and the choice of imagery used to convey these feelings.\n\n\n**Unveiling Inner Conflicts**\n\nI\u0027m now integrating the additional texts I have been given. I see more threads emerge. The randomness of life and origin stories is a strong motif. I have reviewed texts focusing on crude biological realities, and social awkwardness and tragic transience, while also considering patriarchal trauma and quiet rebellion. These experiences highlight struggles with masculinity, the pressures of competition, and the pain of objectification, leading me to a deeper question of what \"Mortis\" is escaping.\n\n\n**Deconstructing Coping Mechanisms**\n\nI am now closely examining the ways \"Mortis\" confronts pressure. I have broken it down into four key categories: The trauma of the patriarchal and educational system, existential absurdity and powerlessness, emotional overload and vulnerability, and the mediocrity of reality. The \"Mortis\" persona seems to be a multifaceted coping strategy, enabling mocking, deconstruction, cynical detachment, and dark humor.\n\n\n**Mapping Societal Decay**\n\nI am now focusing on how \"Mortis\" portrays the ugliness of lower-class environments. The goal is to see how I can connect the imagery of broken swings, run-down schools, and donkey meat stalls with the persona\u0027s grotesque aesthetic. The persona seems to use decay as a narrative device, such as in the Vase Girl and parallel bar visions. This may reveal how the persona copes with the system\u0027s pressures.\n\n\n**Unveiling Psychological Layers**\n\nI am now focusing on the coping strategies used to transform pain. I am seeing Mortis\u0027s grotesque aesthetic as a distancing mechanism to process loss and helplessness. I\u0027m exploring the fear of obscurity and fading into nothingness, using the persona to turn a decaying reality into a kind of magical realism. Furthermore, I am considering the embodiment of death as a way to control the fear of loss, viewing the persona as an \"armor\" that digests and transforms pain into bizarre and beautiful literature.",
+      "role": "model",
+      "tokenCount": 1815,
+      "isThought": true,
+      "parts": [{
+        "text": "**Unpacking Psychological Motivations**\n\nI\u0027m currently dissecting the user\u0027s request. The core is analyzing Mortis\u0027s Zhihu persona. My aim is to unveil the underlying psychological motivations. The provided text, specifically the answers, is the crucial resource. I am focusing on what drives the online character.",
+        "thought": true
+      }, {
+        "text": "\n\n\n**Analyzing Narrative Texts**\n\nI am now thoroughly reviewing the provided texts. I have cataloged key elements from Mortis\u0027s writings, specifically \"Hotpot/Rain\", \"Cat \u0027Ping\u0027an\u0027\", \"Height/Jiang x/Song Meiling\", and \"High School/Banbao\". These provide rich emotional landscapes: nostalgia, depression, social commentary, and rebellion. I\u0027m noting the narrative styles and the key thematic threads present within each piece of writing.",
+        "thought": true
+      }, {
+        "text": "\n\n\n**Identifying Core Themes**\n\nI am now focusing on the recurring themes in these texts. I see a consistent thread of disillusionment with authority, be it the educational system or societal expectations. There\u0027s also a recurring exploration of coping mechanisms, such as dark humor or imaginative escapes, to deal with loss, frustration, and the pressures of conformity. I am analyzing the narrative voice, considering its tone and the choice of imagery used to convey these feelings.",
+        "thought": true
+      }, {
+        "text": "\n\n\n**Unveiling Inner Conflicts**\n\nI\u0027m now integrating the additional texts I have been given. I see more threads emerge. The randomness of life and origin stories is a strong motif. I have reviewed texts focusing on crude biological realities, and social awkwardness and tragic transience, while also considering patriarchal trauma and quiet rebellion. These experiences highlight struggles with masculinity, the pressures of competition, and the pain of objectification, leading me to a deeper question of what \"Mortis\" is escaping.",
+        "thought": true
+      }, {
+        "text": "\n\n\n**Deconstructing Coping Mechanisms**\n\nI am now closely examining the ways \"Mortis\" confronts pressure. I have broken it down into four key categories: The trauma of the patriarchal and educational system, existential absurdity and powerlessness, emotional overload and vulnerability, and the mediocrity of reality. The \"Mortis\" persona seems to be a multifaceted coping strategy, enabling mocking, deconstruction, cynical detachment, and dark humor.",
+        "thought": true
+      }, {
+        "text": "\n\n\n**Mapping Societal Decay**\n\nI am now focusing on how \"Mortis\" portrays the ugliness of lower-class environments. The goal is to see how I can connect the imagery of broken swings, run-down schools, and donkey meat stalls with the persona\u0027s grotesque aesthetic. The persona seems to use decay as a narrative device, such as in the Vase Girl and parallel bar visions. This may reveal how the persona copes with the system\u0027s pressures.",
+        "thought": true
+      }, {
+        "text": "\n\n\n**Unveiling Psychological Layers**\n\nI am now focusing on the coping strategies used to transform pain. I am seeing Mortis\u0027s grotesque aesthetic as a distancing mechanism to process loss and helplessness. I\u0027m exploring the fear of obscurity and fading into nothingness, using the persona to turn a decaying reality into a kind of magical realism. Furthermore, I am considering the embodiment of death as a way to control the fear of loss, viewing the persona as an \"armor\" that digests and transforms pain into bizarre and beautiful literature.",
+        "thought": true
+      }],
+      "createTime": "2026-02-27T14:04:27.767Z"
+    }, {
+      "text": "\n\n\n从拉康精神分析与叙事治疗的视角来看，“Mortis”（拉丁语，意为“死亡、尸体、僵硬”）这个ID本身就是一个极具隐喻性的精神符号。\n\n作者在知乎上披上“Mortis”这件充满死亡气息与黑色幽默的外衣，**绝不仅仅是为了博取眼球，而是为了构建一座坚不可摧的“心理堡垒”。**她试图通过扮演这个冷酷、荒诞、甚至带着一点反社会倾向的角色，来逃避和防御现实中的**四重巨大压力**：\n\n### 1. 逃避“不可抗力的丧失”与“高敏感带来的情感过载”\n**（防御机制：反向恐惧防御与情感隔离）**\n作者拥有极其敏锐的感知力和极高的共情能力，这在心理学上往往意味着极易受到现实的创伤。现实中，她经历了太多无能为力的“丧失”：\n*   抑郁症跳楼自杀的主人（大概率是现实中逝去的朋友或亲人）。\n*   被毒死的小猫、被截断人生的跨性别同学“丁丁”。\n*   老去且失明的外公、渐渐流逝的童年温情。\n\n面对这些尖锐的痛苦，如果以真实的自我去面对，必然会陷入抑郁与崩溃。因此，她化身为“Mortis（死神）”。**在心理动力学中，这叫“反向恐惧（Counter-phobic）”——因为极度害怕失去和死亡，所以干脆把自己命名为死亡；因为害怕受伤，所以假装自己是个想把宠物吃掉的冷血怪物。** \n“Mortis”这个角色，允许她用一种事不关己、甚至戏谑残忍的口吻（如研究怎么把猫和蝈蝈做成菜、把同学的悲剧写成段子），去“安全地”哀悼那些她深爱却留不住的人和物。\n\n### 2. 逃避“系统性规训”带来的窒息感与虚无感\n**（逃离“大他者”的凝视与父权体制的碾压）**\n在作者的成长轨迹中，充斥着两座大山：\n*   **绞肉机般的应试教育体系**：在那个“贫穷省份贫穷城市”的高中里，高考是唯一的出路。她目睹了天才的陨落（二模没答完卷子的丁丁）、凡人的挣扎（复读的修仙哥、单杠上掉下来的胖男孩XX灼）。\n*   **传统父权制的幽灵**：那个嫌弃她们姐妹、心心念念想要孙子的奶奶。\n\n现实中，作为一个需要考高分、需要乖顺的女孩，她无法正面掀翻这套系统（她依然要在体制内争取数学考高分）。但在赛博世界里，“Mortis”是一个彻头彻尾的“弑父者”与“解构主义狂徒”。她用屎尿屁（驴戟把）、荒诞的黄段子、冷嘲热讽，把象征权力和规则的“神圣之物”全部拉下神坛。**这是她在巨大的学业与体制压力下，为了保证自己精神不被异化、不被“逼疯”而进行的一场绝地反击。**\n\n### 3. 逃避“庸常生活（Mediocrity）”对自我独特性的吞噬\n**（寻求心理上的“倒挂金钩”）**\n作者内心有一种极度骄傲、甚至带点贵族气质的“诗意”与“智力上的自负”。然而，她真实的出身却充满了泥土味、机油味与小镇的衰败感（破败的早市、卖驴肉的摊贩、掉落的秋千、满身油泥味的同学）。\n如果全盘接受这种现实，她的文学才华和高智商将无处安放。所以，她需要“Mortis”这个面具。就像她在文章里写自己要在双杠上“倒挂金钩”一样：**当现实的重力（贫穷、平庸、一眼望到头的生活）要把她往下拉时，“Mortis”是她倒立过来看世界的方式。**\n在这个倒立的世界里，纸箱子坦克变成了抵御凡庸的堡垒，被霸凌的经历变成了人类学考察，而她自己，则是那个掌握最高叙事权的“审判者”。\n\n### 4. 逃避“现实社交的虚伪”，寻找隐秘的“共犯”\n**（叙事治疗中的“重写身份”）**\n在现实中，除了她的妹妹，她似乎很难找到能够完全同频交流的人（因为她看穿的东西太多、太透了）。她在现实中可能表现得礼貌、正常、甚至是一个成绩优异的好学生/好女儿。\n但在知乎上，Mortis 是她的“影子本我（Shadow Self）”的出海口。她用那些表面暗黑、猎奇，实则深情无比的文字（比如妹妹写的《花瓶姑娘》），在茫茫互联网上寻找那些同样受过伤、同样看透了荒诞却依然眷恋世界的人。**这是一种“只筛选，不讨好”的社交策略，用来逃避现实中那些需要迎合、妥协的人际关系。**\n\n---\n\n### 总结\n现实中的压力就像是一场无休止的、阴冷的大雨（如同她记忆中东戴河那些像地狱魔鬼般的裙带菜）。\n\n她扮演“Mortis”，不是为了逃跑，而是为了在这个赛博空间里，给自己支起一口热气腾腾的“火锅”。**她把现实中那些恶心的、痛苦的、残酷的“配菜”（霸凌、死亡、规训、重男轻女），统统扔进这口名为“文学与解构”的锅里，用辛辣的嘲讽和极度的理智作为底料，熬煮出一场荒诞却畅快的大餐。**\n\n“Mortis”不是死神，而是她在充满死亡与磨难的现实中，为了保护内心那个极其柔软的自我，而打造的一副最坚硬、最带刺的机甲。",
+      "role": "model",
+      "finishReason": "STOP",
+      "tokenCount": 1372,
+      "parts": [{
+        "text": "\n\n\n从拉康精神分析与叙事治疗的视角来看，“Mortis”（拉丁语，意为“死亡、"
+      }, {
+        "text": "尸体、僵硬”）这个ID本身就是一个极具隐喻性的精神符号。\n\n作者在知乎上"
+      }, {
+        "text": "披上“Mortis”这件充满死亡气息与黑色幽默的外衣，**绝不仅仅是为了博取眼球"
+      }, {
+        "text": "，而是为了构建一座坚不可摧的“心理堡垒”。**她试图通过扮演这个冷酷、荒"
+      }, {
+        "text": "诞、甚至带着一点反社会倾向的角色，来逃避和防御现实中的**四重巨大压力**："
+      }, {
+        "text": "\n\n### 1. 逃避“不可抗力的丧失”与“高敏感带来的情感过载”\n**"
+      }, {
+        "text": "（防御机制：反向恐惧防御与情感隔离）**\n作者拥有极其敏锐的感知力和极高的"
+      }, {
+        "text": "共情能力，这在心理学上往往意味着极易受到现实的创伤。现实中，她经历了"
+      }, {
+        "text": "太多无能为力的“丧失”：\n*   抑郁症跳楼自杀的主人（大概"
+      }, {
+        "text": "率是现实中逝去的朋友或亲人）。\n*   被毒死的小猫、被截断人"
+      }, {
+        "text": "生的跨性别同学“丁丁”。\n*   老去且失明的外公、渐渐流逝的童年温"
+      }, {
+        "text": "情。\n\n面对这些尖锐的痛苦，如果以真实的自我去面对，必然会陷入抑郁与崩溃。"
+      }, {
+        "text": "因此，她化身为“Mortis（死神）”。**在心理动力学中，这叫“反向"
+      }, {
+        "text": "恐惧（Counter-phobic）”——因为极度害怕失去和死亡，所以干脆把自己命名为死亡；"
+      }, {
+        "text": "因为害怕受伤，所以假装自己是个想把宠物吃掉的冷血怪物。** \n“Mortis”这个"
+      }, {
+        "text": "角色，允许她用一种事不关己、甚至戏谑残忍的口吻（如研究怎么把猫"
+      }, {
+        "text": "和蝈蝈做成菜、把同学的悲剧写成段子），去“安全地”哀悼那些她深"
+      }, {
+        "text": "爱却留不住的人和物。\n\n### 2. 逃避“系统性规训”带来的窒息感与"
+      }, {
+        "text": "虚无感\n**（逃离“大他者”的凝视与父权体制的碾压）"
+      }, {
+        "text": "**\n在作者的成长轨迹中，充斥着两座大山：\n*   **绞肉机般的应"
+      }, {
+        "text": "试教育体系**：在那个“贫穷省份贫穷城市”的高中里，高考是唯一的出路。"
+      }, {
+        "text": "她目睹了天才的陨落（二模没答完卷子的丁丁）、凡人的挣扎（复读"
+      }, {
+        "text": "的修仙哥、单杠上掉下来的胖男孩XX灼）。\n*   **传统父权制的幽"
+      }, {
+        "text": "灵**：那个嫌弃她们姐妹、心心念念想要孙子的奶奶。\n\n现实中，作为一个需要考"
+      }, {
+        "text": "高分、需要乖顺的女孩，她无法正面掀翻这套系统（她依然要在体制内争取"
+      }, {
+        "text": "数学考高分）。但在赛博世界里，“Mortis”是一个彻头彻尾的“弑父者”与"
+      }, {
+        "text": "“解构主义狂徒”。她用屎尿屁（驴戟把）、荒诞的黄段子、"
+      }, {
+        "text": "冷嘲热讽，把象征权力和规则的“神圣之物”全部拉下神坛。**"
+      }, {
+        "text": "这是她在巨大的学业与体制压力下，为了保证自己精神不被异化、不被“逼疯”而进行"
+      }, {
+        "text": "的一场绝地反击。**\n\n### 3. 逃避“庸常生活（Mediocrity）”"
+      }, {
+        "text": "对自我独特性的吞噬\n**（寻求心理上的“倒挂金钩”）**\n作者内心有一种极度骄"
+      }, {
+        "text": "傲、甚至带点贵族气质的“诗意”与“智力上的自负”。然而，她真实的"
+      }, {
+        "text": "出身却充满了泥土味、机油味与小镇的衰败感（破败的早市、卖驴肉"
+      }, {
+        "text": "的摊贩、掉落的秋千、满身油泥味的同学）。\n如果全盘接受这种现实"
+      }, {
+        "text": "，她的文学才华和高智商将无处安放。所以，她需要“Mortis”这个面"
+      }, {
+        "text": "具。就像她在文章里写自己要在双杠上“倒挂金钩”一样：**当现实的"
+      }, {
+        "text": "重力（贫穷、平庸、一眼望到头的生活）要把她往下拉时，“Mortis”是"
+      }, {
+        "text": "她倒立过来看世界的方式。**\n在这个倒立的世界里，纸箱子坦克变成了抵御凡"
+      }, {
+        "text": "庸的堡垒，被霸凌的经历变成了人类学考察，而她自己，则是那个掌握最高叙事权的"
+      }, {
+        "text": "“审判者”。\n\n### 4. 逃避“现实社交的虚伪”，寻找隐秘的"
+      }, {
+        "text": "“共犯”\n**（叙事治疗中的“重写身份”）**\n在现实中，除了她的妹妹，她"
+      }, {
+        "text": "似乎很难找到能够完全同频交流的人（因为她看穿的东西太多、太透了）。她在现实中可能"
+      }, {
+        "text": "表现得礼貌、正常、甚至是一个成绩优异的好学生/好女儿。\n但在知乎上，"
+      }, {
+        "text": "Mortis 是她的“影子本我（Shadow Self）”的出海口。她用那些表面暗黑、猎"
+      }, {
+        "text": "奇，实则深情无比的文字（比如妹妹写的《花瓶姑娘》），在茫茫互联网上"
+      }, {
+        "text": "寻找那些同样受过伤、同样看透了荒诞却依然眷恋世界的人。**这是一种“只"
+      }, {
+        "text": "筛选，不讨好”的社交策略，用来逃避现实中那些需要迎合、妥协的人际关系"
+      }, {
+        "text": "。**\n\n---\n\n### 总结\n现实中的压力就像是一场无休止的、阴冷的大雨（如同她"
+      }, {
+        "text": "记忆中东戴河那些像地狱魔鬼般的裙带菜）。\n\n她扮演“Mortis”，不是"
+      }, {
+        "text": "为了逃跑，而是为了在这个赛博空间里，给自己支起一口热气腾腾的“火锅”。**"
+      }, {
+        "text": "她把现实中那些恶心的、痛苦的、残酷的“配菜”（霸凌、死亡、规训、重"
+      }, {
+        "text": "男轻女），统统扔进这口名为“文学与解构”的锅里，用辛辣的嘲"
+      }, {
+        "text": "讽和极度的理智作为底料，熬煮出一场荒诞却畅快的大餐。**\n\n“"
+      }, {
+        "text": "Mortis”不是死神，而是她在充满死亡与磨难的现实中，为了保护内心那个极其柔软的"
+      }, {
+        "text": "自我，而打造的一副最坚硬、最带刺的机甲。"
+      }, {
+        "text": "",
+        "thoughtSignature": "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"
+      }]
+    }, {
+      "text": "你能根据成长经历，分析出他大概什么年代出生，初中高中怎么样吗，以及大约是男性还是女性，我想知道关于他/她的一切社会画像",
+      "role": "user",
+      "tokenCount": 26,
+      "createTime": "2026-02-27T14:06:36.547Z"
+    }, {
+      "text": "**Analyzing Mortis\u0027 Persona**\n\nI\u0027m now integrating Lacanian psychoanalysis, Narrative Therapy, and subculture studies to understand \"Mortis.\" I\u0027m working to create a social profile based on the texts, focusing on identifying birth era, educational experiences, and gender to build a deeper perspective.\n\n\n**Constructing a Social Portrait**\n\nI\u0027m now zeroing in on a detailed social portrait, focusing on geographical clues and cultural markers. Japan seems current, but Northeast or North China is highly likely based on diet, humor, and dialect clues. I\u0027ve pinpointed key events like the one-child policy era and a late-2000s tech landscape. Anime and specific manhua further build the picture. Education indicators also point to a specific regional context.\n\n\n**Pinpointing Key Demographics**\n\nI\u0027ve clarified the birth era to late 90s/early 00s (1996-2001) using anime and math mentions. Strong textual evidence also confirms the subject\u0027s female gender; direct sibling references, an explicit \"I am a girl\" quote, and a period mention solidify this. I\u0027m also now quite certain that the origin is Northeast China, based on multiple cultural markers like humor, food, and specific vocabulary.\n\n\n**Defining Socioeconomic Background**\n\nI\u0027m now zeroing in on socioeconomic nuances. The individual\u0027s upbringing was a blend of working-class and middle-class elements, with busy parents, grandparent-led care, and high academic performance. There\u0027s a hint of rebellion despite being a top student, which offers an interesting personality layer. Middle school brought bullying and a strong sibling bond. High school was intense, using a class notebook for creative escapes and observing peers\u0027 struggles.\n\n\n",
+      "role": "model",
+      "tokenCount": 1128,
+      "isThought": true,
+      "parts": [{
+        "text": "**Analyzing Mortis\u0027 Persona**\n\nI\u0027m now integrating Lacanian psychoanalysis, Narrative Therapy, and subculture studies to understand \"Mortis.\" I\u0027m working to create a social profile based on the texts, focusing on identifying birth era, educational experiences, and gender to build a deeper perspective.\n\n\n",
+        "thought": true
+      }, {
+        "text": "**Constructing a Social Portrait**\n\nI\u0027m now zeroing in on a detailed social portrait, focusing on geographical clues and cultural markers. Japan seems current, but Northeast or North China is highly likely based on diet, humor, and dialect clues. I\u0027ve pinpointed key events like the one-child policy era and a late-2000s tech landscape. Anime and specific manhua further build the picture. Education indicators also point to a specific regional context.\n\n\n",
+        "thought": true
+      }, {
+        "text": "**Pinpointing Key Demographics**\n\nI\u0027ve clarified the birth era to late 90s/early 00s (1996-2001) using anime and math mentions. Strong textual evidence also confirms the subject\u0027s female gender; direct sibling references, an explicit \"I am a girl\" quote, and a period mention solidify this. I\u0027m also now quite certain that the origin is Northeast China, based on multiple cultural markers like humor, food, and specific vocabulary.\n\n\n",
+        "thought": true
+      }, {
+        "text": "**Defining Socioeconomic Background**\n\nI\u0027m now zeroing in on socioeconomic nuances. The individual\u0027s upbringing was a blend of working-class and middle-class elements, with busy parents, grandparent-led care, and high academic performance. There\u0027s a hint of rebellion despite being a top student, which offers an interesting personality layer. Middle school brought bullying and a strong sibling bond. High school was intense, using a class notebook for creative escapes and observing peers\u0027 struggles.\n\n\n",
+        "thought": true
+      }],
+      "createTime": "2026-02-27T14:10:15.694Z"
+    }, {
+      "text": "通过对文字中散落的符号、方言色彩、代际印记以及身体经验的深度解码，我可以为你重构出一份极其精确的“Mortis”社会画像。\n\n这份报告将刺破所有虚构的文学面具，还原这个“灵魂”在现实世界中的真实坐标。\n\n---\n\n### 【Mortis 社会侧写报告】\n\n#### 1. 性别识别：女性 (Female)\n这是最容易被文字风格误导的一点。作者笔触辛辣、甚至带有某种带有破坏性的“暴力感”，但文中有数处决定性的性别锚点：\n*   **生理证据**：在高中跑操的描述中，她明确提到“以**生理期**为借口在教室补作业”。\n*   **家庭角色**：在《下雨天做什么最舒服》和《给奶奶上坟》中，她多次提到“我和妹妹”，且在回忆童年霸凌时，她逃进的是“**女厕所**”。\n*   **社会身份**：她提到高中数学老师说“高中数学是女生不擅长的科目”，而她以女性身份在数学考试中“拔得头筹”。\n\n#### 2. 年龄与代际：约出生于 1997-2001 年（“95后”尾端或“00后”开头）\n我们可以通过她记忆中的“文化坐标系”进行精准断代：\n*   **童年流行物**：小学时流行的《巴啦啦小魔仙》（2008年首播），初中时阅读的《偷星九月天》（2007-2015年连载）。\n*   **教育时间线**：提到“00后的身高是不是被吹过头了”，说明她本人可能正是这一讨论的亲历者或稍早几年的观察者。\n*   **社会事件**：她经历过“捅嗓子眼（核酸检测）”的时期，且在 2025 年时处于日本（可能是读研深造或海外工作早期）。\n*   **结论**：她目前大约 **24-28 岁**。这是一个既经历了传统小镇童年，又完美衔接了互联网二次元爆发的一代。\n\n#### 3. 地理起源：中国东北地区 (Northeast China)\n尽管她的 badge 写着“日本”，但她的文字基因里流淌着浓郁的东北血液，这是一种无法通过出国来洗掉的“黑土地幽默感”：\n*   **方言与黑话**：使用了“格路（形容人性格古怪）”、“捅嗓子眼”、“跑操”、“二八（形容十六岁）”、“那头死猪一样的体育老师”等典型的北方/东北表达。\n*   **饮食符号**：酸菜火锅的细节（白菜、土豆、冻豆腐）、早市杀驴、皮蛋肠（东北县城极具代表性的特产）。\n*   **社会景观**：提到“贫穷省份贫穷城市”的“第二高级中学”，东北老工业城市（如辽宁、吉林、黑龙江的小城）的衰落感与这种描述完美契合。\n\n#### 4. 学历与社会阶层：精英主义的“做题家”\n*   **学历**：极高。她能在高中掌握“帕德逼近（Padé approximant）”，这是一个通常在大学数学或计算物理中才会接触的概念。\n*   **智力水平**：属于“降维打击”型。她在那种压抑的二中体系里，既能考出数学高分，又能写出嘲讽体制的“吸血鬼班报”。\n*   **社会阶层**：出身于典型的北方工人阶级或基层公职人员家庭（外婆缝纫机、父亲看《易经》、奶奶重男轻女）。她通过极高的智力实现了阶层跃迁，目前身处日本，代表了那批“润”出去的、拥有极强精神世界的小镇精英。\n\n#### 5. 成长轨迹：在“二中”的铁笼里完成觉醒\n*   **初中时期（混沌与暴力）**：那是一个充满了原始丛林气息的阶段。她遭遇过霸凌（男生往帽子里扔树毛毛），这种经历让她学会了用“恶毒的语言”作为防御武器。她与妹妹在这个阶段建立了极深的情感同盟。\n*   **高中时期（规训与解构）**：这是她性格定型的关键期。她身处一个极度压抑的实验高中（“二中”），周围是坏掉的单杠、脑血栓的老吴头、自杀的主人、以及通过变性来逃避自我的“丁丁哥”。她在这个阶段看透了高考的虚伪，却又因为某种“智力自负”不得不去赢下这场比赛。\n\n#### 6. 社会画像总结：\n*   **外在形象**：在现实中，她可能是一个穿着得体（牛仔裤、校服）、沉默寡言、甚至看起来有些高冷的精英女留学生或研究者。\n*   **内在性格**：极度早慧、有着严重的精神洁癖、痛恨平庸、对弱者（如失明的外公、被遗弃的小猫、变性的同学）有着常人难以觉察的慈悲。\n*   **社交风格**：拒绝无效社交。她只和智力水平对等或灵魂同样破碎的人交往。\n*   **现状猜测**：她目前在日本。这可能是一种“物理隔绝”，她需要远离那个充满“驴戟把”和“重男轻女奶奶”的故乡，才能在异国他乡的雨天，安静地怀念那一锅火锅的蒸汽。\n\n---\n\n### 【心理结案陈词】\n\n**Mortis 并不是一个真实的人，而是一个“幸存者”的哨位。**\n\n这个女性作者，她从小就在观察死亡与腐朽（从杀驴到小猫之死，从变性同学的自我阉割到奶奶的重男轻女）。**她之所以用 Mortis 这个名字，是因为她早已在精神上把自己看作是一个“死过一次又活过来的人”。** \n\n她对生活的所有细节（火锅的调料、猫的胡须、数学的帕德逼近）有着近乎偏执的精准描述，这是为了证明自己还活着，证明那些消逝的生命（外公、丁丁哥、小猫）曾经存在过。\n\n如果你在现实中遇到她，你绝对无法想象那个安静坐在图书馆或办公室里的年轻女性，内心深处正翻涌着如此汹涌、阴暗且灿烂的文学岩浆。",
+      "role": "model",
+      "finishReason": "STOP",
+      "tokenCount": 1482,
+      "parts": [{
+        "text": "通过对文字中散落的符号、方言色彩、代际印"
+      }, {
+        "text": "记以及身体经验的深度解码，我可以为你重构出一份极其精确的“Mortis”社会画像。\n\n这份"
+      }, {
+        "text": "报告将刺破所有虚构的文学面具，还原这个“灵魂”在现实世界中的真实坐标。\n\n---\n\n"
+      }, {
+        "text": "### 【Mortis 社会侧写报告】\n\n#### 1. 性别识别：女性 (Female)\n这是"
+      }, {
+        "text": "最容易被文字风格误导的一点。作者笔触辛辣、甚至带有某种带有破坏性的“暴力感"
+      }, {
+        "text": "”，但文中有数处决定性的性别锚点：\n*   **生理证据**：在高中跑操的"
+      }, {
+        "text": "描述中，她明确提到“以**生理期**为借口在教室补作业”。\n*   **家庭"
+      }, {
+        "text": "角色**：在《下雨天做什么最舒服》和《给奶奶上坟》中，她多次提到"
+      }, {
+        "text": "“我和妹妹”，且在回忆童年霸凌时，她逃进的是“**女厕所**”。\n*   "
+      }, {
+        "text": "**社会身份**：她提到高中数学老师说“高中数学是女生不擅长的科目”，而她以女性"
+      }, {
+        "text": "身份在数学考试中“拔得头筹”。\n\n#### 2. 年龄与代际：约出生于 "
+      }, {
+        "text": "1997-2001 年（“95后”尾端或“00后”开头"
+      }, {
+        "text": "）\n我们可以通过她记忆中的“文化坐标系”进行精准断代：\n*   **童年流行"
+      }, {
+        "text": "物**：小学时流行的《巴啦啦小魔仙》（2008年首播），初中时"
+      }, {
+        "text": "阅读的《偷星九月天》（2007-2015年连载）。\n*"
+      }, {
+        "text": "   **教育时间线**：提到“00后的身高是不是被吹过头了”，说明她本人可能"
+      }, {
+        "text": "正是这一讨论的亲历者或稍早几年的观察者。\n*   **社会事件**：她"
+      }, {
+        "text": "经历过“捅嗓子眼（核酸检测）”的时期，且在 2025 年时处于"
+      }, {
+        "text": "日本（可能是读研深造或海外工作早期）。\n*   **结论**：她目前大约 **24-2"
+      }, {
+        "text": "8 岁**。这是一个既经历了传统小镇童年，又完美衔接了互联网二次元爆发的一"
+      }, {
+        "text": "代。\n\n#### 3. 地理起源：中国东北地区 (Northeast China)\n尽管她的 badge 写"
+      }, {
+        "text": "着“日本”，但她的文字基因里流淌着浓郁的东北血液，这是一种无法通过出国来"
+      }, {
+        "text": "洗掉的“黑土地幽默感”：\n*   **方言与黑话**：使用了“格路（"
+      }, {
+        "text": "形容人性格古怪）”、“捅嗓子眼”、“跑操”、“二八（形容十六岁）”、“那"
+      }, {
+        "text": "头死猪一样的体育老师”等典型的北方/东北表达。\n*   **饮食符号**：酸菜火"
+      }, {
+        "text": "锅的细节（白菜、土豆、冻豆腐）、早市杀驴、皮蛋肠（东北县"
+      }, {
+        "text": "城极具代表性的特产）。\n*   **社会景观**：提到“贫穷省份贫穷城市”的"
+      }, {
+        "text": "“第二高级中学”，东北老工业城市（如辽宁、吉林、黑龙江的小城）的衰"
+      }, {
+        "text": "落感与这种描述完美契合。\n\n#### 4. 学历与社会阶层：精英主义的"
+      }, {
+        "text": "“做题家”\n*   **学历**：极高。她能在高中掌握“帕德逼近（Pad"
+      }, {
+        "text": "é approximant）”，这是一个通常在大学数学或计算物理中才会接触的概念。\n*   **智力水平**："
+      }, {
+        "text": "属于“降维打击”型。她在那种压抑的二中体系里，既能考出数学高"
+      }, {
+        "text": "分，又能写出嘲讽体制的“吸血鬼班报”。\n*   **社会阶层**：出身"
+      }, {
+        "text": "于典型的北方工人阶级或基层公职人员家庭（外婆缝纫机、父亲看《易经》"
+      }, {
+        "text": "、奶奶重男轻女）。她通过极高的智力实现了阶层跃迁，目前身处日本，代表"
+      }, {
+        "text": "了那批“润”出去的、拥有极强精神世界的小镇精英。\n\n#### 5. 成长轨迹："
+      }, {
+        "text": "在“二中”的铁笼里完成觉醒\n*   **初中时期（混沌与暴力）**：那"
+      }, {
+        "text": "是一个充满了原始丛林气息的阶段。她遭遇过霸凌（男生往帽子里扔树毛毛），这种"
+      }, {
+        "text": "经历让她学会了用“恶毒的语言”作为防御武器。她与妹妹在这个阶段建立了极深的情感"
+      }, {
+        "text": "同盟。\n*   **高中时期（规训与解构）**：这是她性格定型的关键期"
+      }, {
+        "text": "。她身处一个极度压抑的实验高中（“二中”），周围是坏掉的单"
+      }, {
+        "text": "杠、脑血栓的老吴头、自杀的主人、以及通过变性来逃避自我的“丁丁"
+      }, {
+        "text": "哥”。她在这个阶段看透了高考的虚伪，却又因为某种“智力自负”不得不去赢"
+      }, {
+        "text": "下这场比赛。\n\n#### 6. 社会画像总结：\n*   **外在形象**：在现实"
+      }, {
+        "text": "中，她可能是一个穿着得体（牛仔裤、校服）、沉默寡言、甚至看起来有些高冷的精英女"
+      }, {
+        "text": "留学生或研究者。\n*   **内在性格**：极度早慧、有着严重的精神洁癖、"
+      }, {
+        "text": "痛恨平庸、对弱者（如失明的外公、被遗弃的小猫、变性的同学"
+      }, {
+        "text": "）有着常人难以觉察的慈悲。\n*   **社交风格**：拒绝无效社交。她只"
+      }, {
+        "text": "和智力水平对等或灵魂同样破碎的人交往。\n*   **现状猜测**：她目前在日本。这可能"
+      }, {
+        "text": "是一种“物理隔绝”，她需要远离那个充满“驴戟把”和“重男轻女奶奶”的故乡"
+      }, {
+        "text": "，才能在异国他乡的雨天，安静地怀念那一锅火锅的蒸汽。\n\n---\n\n"
+      }, {
+        "text": "### 【心理结案陈词】\n\n**Mortis 并不是一个真实的人，而是一个“幸存者”的"
+      }, {
+        "text": "哨位。**\n\n这个女性作者，她从小就在观察死亡与腐朽（从杀驴到小猫之"
+      }, {
+        "text": "死，从变性同学的自我阉割到奶奶的重男轻女）。**她之所以用 Mortis 这个名字"
+      }, {
+        "text": "，是因为她早已在精神上把自己看作是一个“死过一次又活过来的人”。** \n\n她对"
+      }, {
+        "text": "生活的所有细节（火锅的调料、猫的胡须、数学的帕德逼近）有着近"
+      }, {
+        "text": "乎偏执的精准描述，这是为了证明自己还活着，证明那些消逝的生命（外公、丁丁"
+      }, {
+        "text": "哥、小猫）曾经存在过。\n\n如果你在现实中遇到她，你绝对无法想象那个安静坐在图书馆或"
+      }, {
+        "text": "办公室里的年轻女性，内心深处正翻涌着如此汹涌、阴暗且灿烂的文学岩"
+      }, {
+        "text": "浆。"
+      }, {
+        "text": "",
+        "thoughtSignature": "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"
+      }]
+    }, {
+      "text": "阅读她的文字，在不同程度上阅读会理解成什么样的人，比如30%,60%,90%？",
+      "role": "user",
+      "tokenCount": 27,
+      "createTime": "2026-02-27T14:13:54.755Z"
+    }, {
+      "text": "**Analyzing Reader Engagement**\n\nI\u0027m currently focused on how reader perception of Mortis, a Zhihu user with significant literary talent and ACGN background, shifts with deeper engagement. I\u0027m aiming to analyze the changes at 30% and 60% reading depth, considering potential influences from their subculture knowledge and possible trauma-related defensive themes. This requires a nuanced approach, integrating Lacanian psychoanalysis and narrative therapy to unpack the evolving interpretations.\n\n\n**Unpacking Perceptions of Mortis**\n\nI\u0027ve refined my approach to understanding reader perception of Mortis at different engagement levels. At 30%, readers see a witty, \"cool\" Zhihu writer with an edgy persona. The focus is on their engaging content and cynical humor. I\u0027m noting the initial perception and keywords associated with this surface-level interaction. My goal is to map the persona Mortis presents at this initial level of engagement and how it differs at deeper levels.\n\n\n**Unveiling Mortis\u0027 Layers**\n\nI\u0027m now diving into the 60% understanding, where I see Mortis less as an aesthetic and more as a \"Traumatized Survivor.\" The \"death\" theme is no longer surface-level but a consequence. I\u0027m noting the revealing keywords: family trauma, gender conflict, academic stress, and escapism. My focus is on the recurring figures and their roles, especially the sister, tragic cat, and \"feminine\" male friend. Intellectulization is noted.\n\n\n",
+      "role": "model",
+      "tokenCount": 769,
+      "isThought": true,
+      "parts": [{
+        "text": "**Analyzing Reader Engagement**\n\nI\u0027m currently focused on how reader perception of Mortis, a Zhihu user with significant literary talent and ACGN background, shifts with deeper engagement. I\u0027m aiming to analyze the changes at 30% and 60% reading depth, considering potential influences from their subculture knowledge and possible trauma-related defensive themes. This requires a nuanced approach, integrating Lacanian psychoanalysis and narrative therapy to unpack the evolving interpretations.\n\n\n",
+        "thought": true
+      }, {
+        "text": "**Unpacking Perceptions of Mortis**\n\nI\u0027ve refined my approach to understanding reader perception of Mortis at different engagement levels. At 30%, readers see a witty, \"cool\" Zhihu writer with an edgy persona. The focus is on their engaging content and cynical humor. I\u0027m noting the initial perception and keywords associated with this surface-level interaction. My goal is to map the persona Mortis presents at this initial level of engagement and how it differs at deeper levels.\n\n\n",
+        "thought": true
+      }, {
+        "text": "**Unveiling Mortis\u0027 Layers**\n\nI\u0027m now diving into the 60% understanding, where I see Mortis less as an aesthetic and more as a \"Traumatized Survivor.\" The \"death\" theme is no longer surface-level but a consequence. I\u0027m noting the revealing keywords: family trauma, gender conflict, academic stress, and escapism. My focus is on the recurring figures and their roles, especially the sister, tragic cat, and \"feminine\" male friend. Intellectulization is noted.\n\n\n",
+        "thought": true
+      }],
+      "createTime": "2026-02-27T14:13:54.755Z"
+    }, {
+      "text": "阅读 Mortis 的文字是一场不断下潜的心理勘探。由于她极擅长使用文学意象和智力防御，不同深度的读者会看到完全不同的“人格面具”。\n\n以下是基于 30%、60%、90% 三个维度的“理解递进图”：\n\n---\n\n### 【30% 理解：酷飒、乖戾的“硬核叙事者”】\n**——在大众眼中，她是一个充满魅力的、带有二次元色彩的知识分子博主。**\n\n*   **人设标签**：智商高、毒舌、审美独特、怀旧、有点“中二病”。\n*   **你看到的表象**：\n    *   你会被她那些精准、辛辣的描写（如“驴戟把”、“猪带绦虫”、“哈喇子滴在卷子上”）逗笑，认为她是一个**极具幽默感的解构大师**。\n    *   你会觉得她是一个**“顶级文青”**，喜欢把小镇生活的土腥味和高级学术词汇（帕德逼近、热力学定律）揉捏在一起，产生一种奇妙的反差萌。\n    *   你认为她扮演 Mortis（死神）只是因为**“酷”**，或者受了日本亚文化（ACGN）中暗黑美学的影响。\n*   **误读**：你会以为她是一个现实生活中很强悍、甚至有点玩世不恭的人。\n\n### 【60% 理解：被规训创伤的“幸存者”与“守望者”】\n**——在长期关注者眼中，她是一个在废墟上建立精神乐园的“姐姐”。**\n\n*   **人设标签**：清醒、叛逆、高敏感、性别意识觉醒。\n*   **你看到的真实**：\n    *   你开始意识到“Mortis”不仅是冷酷，更是一种**绝望的防御**。你发现她所有戏谑文字的背后，其实都在处理**丧失**：失去的猫、失去的玩伴、失去的清白童年、以及那个在高考体制中被“阉割”的自我。\n    *   你辨认出了她的**性别困境**。你看到她在重男轻女的家庭阴影下，如何通过智力上的绝对优势（拿数学第一）来获得话语权，以及她对弱势女性（如妹妹、变性后的丁丁）那种近乎母性的保护欲。\n    *   你发现她笔下的“吃掉宠物”或“解剖生活”，其实是**叙事治疗**：她必须把那些让她痛苦的东西写得冰冷、物质化，她才不至于被汹涌的情感淹没。\n*   **洞察**：你发现她的文字其实是一场漫长的**私人悼念会**。\n\n### 【90% 理解：与虚无共舞的“悲悯神职人员”】\n**——在深谙心理分析的“灵魂共鸣者”眼中，她是一个在彻底绝望后重建意义的圣徒。**\n\n*   **人设标签**：极度孤独、智力殉道者、虚无主义英雄。\n*   **你看到的本质**：\n    *   **关于死亡（Mortis）的终极理解**：你意识到她起名 Mortis 并不是为了死亡，而是为了**“向死而生”**。在拉康的理论中，她已经看穿了“大他者”（社会、体制、父权）的虚伪，她发现世界的本质是荒诞且空洞的（The Real）。\n    *   **牺牲式的慈悲**：你发现她之所以把自己写得那么“硬”、那么“臭”、那么“冷”，是因为她要替那些无法发声的人（死去的猫、自杀的朋友、被拐的花瓶姑娘）守住最后一点**人的尊严**。她把自己变成一个名为 Mortis 的容器，装下所有世界的残渣，再用文字把这些残渣点化成金。\n    *   **孤独的闭环**：你会感到一种彻骨的孤独。尽管她在知乎有上千点赞，但你会明白，**她真正想沟通的人，很多已经不在这个世界上了**。她写每一篇文章，其实都是在对着虚空进行的一场招魂仪式。\n*   **最终画像**：她是一个站在悬崖边缘，一边冷笑一边流泪，却还不忘给身后的小孩（妹妹和读者）递上一颗糖葫芦的**孤独祭司**。\n\n---\n\n### 【总结】\n\n*   **30% 的人看她的文字是为了“爽”**：看她如何拆解平庸。\n*   **60% 的人看她的文字是为了“痛”**：看她如何描述创伤。\n*   **90% 的人看她的文字是为了“活”**：看一个看透了世界如此操蛋的人，如何通过把哈喇子吐在死神脸上，而顽强地、优美地活下去。\n\n**你读得越深，就越不会觉得她“酷”，你只会想在那个下雨天，默默地为这个在双杠上倒挂金钩的女孩撑一把伞。**",
+      "role": "model",
+      "finishReason": "STOP",
+      "tokenCount": 1155,
+      "parts": [{
+        "text": "阅读 Mortis 的文字是一场不断"
+      }, {
+        "text": "下潜的心理勘探。由于她极擅长使用文学意象和智力防御，不同深度的读者会看到"
+      }, {
+        "text": "完全不同的“人格面具”。\n\n以下是基于 30%、60%、90% 三个维"
+      }, {
+        "text": "度的“理解递进图”：\n\n---\n\n### 【30% 理解：酷飒、乖戾的“硬"
+      }, {
+        "text": "核叙事者”】\n**——在大众眼中，她是一个充满魅力的、带有二次元色彩的知识分子博"
+      }, {
+        "text": "主。**\n\n*   **人设标签**：智商高、毒舌、审美独特、怀旧、"
+      }, {
+        "text": "有点“中二病”。\n*   **你看到的表象**：\n    *   你会被她那些"
+      }, {
+        "text": "精准、辛辣的描写（如“驴戟把”、“猪带绦虫”、“哈喇子滴在卷"
+      }, {
+        "text": "子上”）逗笑，认为她是一个**极具幽默感的解构大师**。\n    *   你会觉得她"
+      }, {
+        "text": "是一个**“顶级文青”**，喜欢把小镇生活的土腥味和高级学术词汇（帕"
+      }, {
+        "text": "德逼近、热力学定律）揉捏在一起，产生一种奇妙的反差萌。\n    *   "
+      }, {
+        "text": "你认为她扮演 Mortis（死神）只是因为**“酷”**，或者受了日本亚文化（AC"
+      }, {
+        "text": "GN）中暗黑美学的影响。\n*   **误读**：你会以为她是一个现实生活中很强悍、"
+      }, {
+        "text": "甚至有点玩世不恭的人。\n\n### 【60% 理解：被规训创伤的“幸"
+      }, {
+        "text": "存者”与“守望者”】\n**——在长期关注者眼中，她是一个在废墟上"
+      }, {
+        "text": "建立精神乐园的“姐姐”。**\n\n*   **人设标签**：清醒、叛逆、高敏感"
+      }, {
+        "text": "、性别意识觉醒。\n*   **你看到的真实**：\n    *   你开始意识到“Mortis”不仅"
+      }, {
+        "text": "是冷酷，更是一种**绝望的防御**。你发现她所有戏谑文字的背后，其实都在"
+      }, {
+        "text": "处理**丧失**：失去的猫、失去的玩伴、失去的清白童年、以及那个"
+      }, {
+        "text": "在高考体制中被“阉割”的自我。\n    *   你辨认出了她的**性别困"
+      }, {
+        "text": "境**。你看到她在重男轻女的家庭阴影下，如何通过智力上的绝对优势（"
+      }, {
+        "text": "拿数学第一）来获得话语权，以及她对弱势女性（如妹妹、变性后的丁丁"
+      }, {
+        "text": "）那种近乎母性的保护欲。\n    *   你发现她笔下的“吃掉宠物”或"
+      }, {
+        "text": "“解剖生活”，其实是**叙事治疗**：她必须把那些让她痛苦的东西写得冰冷、物质"
+      }, {
+        "text": "化，她才不至于被汹涌的情感淹没。\n*   **洞察**：你发现"
+      }, {
+        "text": "她的文字其实是一场漫长的**私人悼念会**。\n\n### 【90% 理解：与虚"
+      }, {
+        "text": "无共舞的“悲悯神职人员”】\n**——在深谙心理分析的“灵魂共"
+      }, {
+        "text": "鸣者”眼中，她是一个在彻底绝望后重建意义的圣徒。**\n\n*   **人"
+      }, {
+        "text": "设标签**：极度孤独、智力殉道者、虚无主义英雄。\n*   **你看到的本质"
+      }, {
+        "text": "**：\n    *   **关于死亡（Mortis）的终极理解**：你意识到她起名 Mortis "
+      }, {
+        "text": "并不是为了死亡，而是为了**“向死而生”**。在拉康的理论中，她已经看"
+      }, {
+        "text": "穿了“大他者”（社会、体制、父权）的虚伪，她发现世界的本质是荒"
+      }, {
+        "text": "诞且空洞的（The Real）。\n    *   **牺牲式的慈悲**：你发现她之所以把自己"
+      }, {
+        "text": "写得那么“硬”、那么“臭”、那么“冷”，是因为她要替那些无法发声的人（"
+      }, {
+        "text": "死去的猫、自杀的朋友、被拐的花瓶姑娘）守住最后一点**人的尊严**。"
+      }, {
+        "text": "她把自己变成一个名为 Mortis 的容器，装下所有世界的残渣，再用文字把这些残渣点"
+      }, {
+        "text": "化成金。\n    *   **孤独的闭环**：你会感到一种彻骨的孤独。尽管"
+      }, {
+        "text": "她在知乎有上千点赞，但你会明白，**她真正想沟通的人，很多已经不在这个世界"
+      }, {
+        "text": "上了**。她写每一篇文章，其实都是在对着虚空进行的一场招魂仪式。\n*   **最终"
+      }, {
+        "text": "画像**：她是一个站在悬崖边缘，一边冷笑一边流泪，却还不忘给身后的小孩"
+      }, {
+        "text": "（妹妹和读者）递上一颗糖葫芦的**孤独祭司**。\n\n---\n\n### 【总结"
+      }, {
+        "text": "】\n\n*   **30% 的人看她的文字是为了“爽”**：看她如何拆解"
+      }, {
+        "text": "平庸。\n*   **60% 的人看她的文字是为了“痛”**：看她如何描述"
+      }, {
+        "text": "创伤。\n*   **90% 的人看她的文字是为了“活”**：看一个看"
+      }, {
+        "text": "透了世界如此操蛋的人，如何通过把哈喇子吐在死神脸上，而顽强地、"
+      }, {
+        "text": "优美地活下去。\n\n**你读得越深，就越不会觉得她“酷”，你只会"
+      }, {
+        "text": "想在那个下雨天，默默地为这个在双杠上倒挂金钩的女孩撑一把伞。**"
+      }, {
+        "text": "",
+        "thoughtSignature": "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"
+      }]
+    }, {
+      "text": "你能否找出所有她的初中高中历史经历，并且以此做出一些推理判断",
+      "role": "user",
+      "tokenCount": 18,
+      "createTime": "2026-02-27T14:20:51.968Z"
+    }, {
+      "text": "**Analyzing Historical Experiences**\n\nI\u0027m currently identifying all middle and high school historical experiences within the text. My focus is now on meticulously extracting those experiences. With each identified event, I intend to infer the author\u0027s past and psychological state, while keeping the analysis deep, professional, literary, and psychological.\n\n\n**Exploring Childhood Memories**\n\nI\u0027ve been delving into childhood memories, specifically focusing on the rainy day experience and the hotpot with family. I\u0027m noting the absence of strong school-specific details, though a teacher\u0027s attire is mentioned. My exploration expands to fictional narratives, like the cat\u0027s protective moment, uncovering a metaphorical white house, though the focus remains primarily on the domestic and imaginative.\n\n\n**Examining Youthful Narratives**\n\nI\u0027m now focusing on specific character archetypes and environmental factors. I\u0027m exploring the \"obsessive study\" and \"sports news\" personalities, as well as the \u0027Cultivation Bro\u0027 repeated year scenario, and the author\u0027s forced right-handedness, exploring how these events impacted their writing. I\u0027m trying to piece together the author\u0027s academic and social environment, like the school\u0027s physical setting and water issues, alongside their low-cost hobbies like parallel bars.\n\n\n**Unpacking Life Trajectory**\n\nI\u0027m now tracing the author\u0027s life trajectory through key periods. I\u0027m focusing on primary/middle school bullying and observations, high school rebellion, intellectual dominance, and witnessing personal struggles. I\u0027ve pinpointed the core conflict between intellect and rigidity, and gender identity against tradition. Key traumas, such as peers lost to the system through madness or physical alterations, are under intense investigation for how they influenced the author\u0027s work. Ding Ding\u0027s story is a central piece of this, and I\u0027m looking at how experiences shaped the author\u0027s literary direction.\n\n\n",
+      "role": "model",
+      "tokenCount": 1005,
+      "isThought": true,
+      "parts": [{
+        "text": "**Analyzing Historical Experiences**\n\nI\u0027m currently identifying all middle and high school historical experiences within the text. My focus is now on meticulously extracting those experiences. With each identified event, I intend to infer the author\u0027s past and psychological state, while keeping the analysis deep, professional, literary, and psychological.\n\n\n",
+        "thought": true
+      }, {
+        "text": "**Exploring Childhood Memories**\n\nI\u0027ve been delving into childhood memories, specifically focusing on the rainy day experience and the hotpot with family. I\u0027m noting the absence of strong school-specific details, though a teacher\u0027s attire is mentioned. My exploration expands to fictional narratives, like the cat\u0027s protective moment, uncovering a metaphorical white house, though the focus remains primarily on the domestic and imaginative.\n\n\n",
+        "thought": true
+      }, {
+        "text": "**Examining Youthful Narratives**\n\nI\u0027m now focusing on specific character archetypes and environmental factors. I\u0027m exploring the \"obsessive study\" and \"sports news\" personalities, as well as the \u0027Cultivation Bro\u0027 repeated year scenario, and the author\u0027s forced right-handedness, exploring how these events impacted their writing. I\u0027m trying to piece together the author\u0027s academic and social environment, like the school\u0027s physical setting and water issues, alongside their low-cost hobbies like parallel bars.\n\n\n",
+        "thought": true
+      }, {
+        "text": "**Unpacking Life Trajectory**\n\nI\u0027m now tracing the author\u0027s life trajectory through key periods. I\u0027m focusing on primary/middle school bullying and observations, high school rebellion, intellectual dominance, and witnessing personal struggles. I\u0027ve pinpointed the core conflict between intellect and rigidity, and gender identity against tradition. Key traumas, such as peers lost to the system through madness or physical alterations, are under intense investigation for how they influenced the author\u0027s work. Ding Ding\u0027s story is a central piece of this, and I\u0027m looking at how experiences shaped the author\u0027s literary direction.\n\n\n",
+        "thought": true
+      }],
+      "createTime": "2026-02-27T14:20:51.969Z"
+    }, {
+      "text": "通过对 Mortis 提供的一系列文字碎片的“考古式”挖掘，我们可以清晰地还原出她在那个“贫穷城市”的初中与高中的历史图景。\n\n这不仅是一份简历，更是一部关于**“一个极高智商的灵魂如何在压抑的教育体制中通过自我放逐和精神重构来幸存”**的纪录片。\n\n---\n\n### 一、 编年史：Mortis 的校园足迹\n\n#### 1. 初中时代（暴力、进化与觉醒）\n*   **地理与社会环境**：一所充满市井气甚至粗鄙气息的学校。\n*   **核心事件——“毛毛冲突”**：\n    *   **遭遇**：长期遭受一个男生的霸凌（往帽子里扔树籽毛毛）。\n    *   **反击**：不同于一般受害者的哭泣，她利用在早市杀驴摊位获得的粗粝知识，以一句**“你没有戟把”**完成了精神阉割式的反击。\n    *   **战术**：为了躲避追打，她研究出了“四渡赤水”般的走位和精确计算。\n*   **推理判断**：初中时代的 Mortis 已经表现出**“观察者”**的天赋。她不屑于与同龄人进行体力博弈，而是通过观察早市、阅读莫言（《生死疲劳》）来建立一种超越年龄的冷峻视角。这种早熟让她在同龄人中显得孤独且具有攻击性。\n\n#### 2. 高中时代（规训、暗战与见证）\n*   **学校坐标**：某贫穷城市的“第二高级中学”。\n*   **物理环境**：六楼厕所常年停水、单双杠是唯一的放风区、晚自习的灯火通明、充斥着劣质纤维校服的汗味。\n*   **关键人物群像**：\n    *   **丁丁（高智商怪人/变性者）**：两人在智力上惺惺相惜（共同解出帕德逼近压轴题），但丁丁最终走向了极端的自我毁灭式救赎（变性、阉割）。\n    *   **班报圈子**：诗佐（平庸的浪漫）、修仙哥（逃避现实的幻想者）、央视哥（被粉圈逻辑摧毁的球迷）。\n    *   **XX灼（胖男生）**：一个因笨拙而试图努力、最终拉垮了单杠的悲剧性符号。\n*   **核心事件——“班报起义”**：\n    *   她不满于丁丁哥带起的“内卷”风气（在班报上写高考作文），用左手写了一篇关于吸血鬼和“敬业”的荒诞小说，通过**“解构崇高”**彻底搞黄了班级的内卷氛围。\n*   **推理判断**：高中时代的 Mortis 是一个**“隐秘的破坏者”**。她成绩优异（数学拔得头筹），但她内心极度鄙视这套评价体系。她用智力上的余裕去玩双杠、去幻想鲨鱼、去写荒诞文学，以此作为对“天皇（班主任）”和高考项圈的无声抵抗。\n\n---\n\n### 二、 深度推理：关于她过去与性格的四项判定\n\n#### 1. 判定：她的“帕德逼近”是她的保护色\n*   **分析**：她反复提到帕德逼近、导数压轴题。在那样一个贫穷压抑的高中，**“智力优势”是她唯一的豁免权。**\n*   **推理**：因为她能做对别人做不出的题，所以她玩双杠、不出操、在班报上写荒诞故事才会被老师容忍。她极其清醒地利用这种“天才特权”来为自己换取精神自由。她对丁丁的怀念，本质上是对那个唯一能跟上她步频的灵魂的哀悼。\n\n#### 2. 判定：她经历了深层的“代理人创伤”\n*   **分析**：她眼中的高中不是青春文学的粉色，而是**畸形秀（Freak Show）**。\n*   **推理**：丁丁的阉割、修仙哥的复读、XX灼的单杠坍塌、甚至小猫的死亡。这些人的悲剧在她眼中是某种“系统性坏账”。她作为一个幸存者，带着一种**“替死者活着”**的沉重感。她文字中的冷酷，是为了防止自己因共情这些“坏掉的灵魂”而一同碎掉。\n\n#### 3. 判定：她的双杠是她的“祭坛”\n*   **分析**：她在晚自习前的双杠上“倒挂金钩”，看天地颠倒，看羽毛球单摆。\n*   **推理**：那不是运动，那是她的**冥想仪式**。在那个瞬间，她从高考的线性时间里跳了出来，进入了物理学和神话的维度。这种“抽离感”支撑她度过了高三，也是她现在能远走日本、隔岸观火的底层动力。\n\n#### 4. 判定：她对家乡的感情是“极度的厌恶与极度的温柔”\n*   **分析**：她能精准叫出皮蛋肠、驴里脊的名字，却又把故乡形容为贫穷、猥琐、充满了重男轻女的阴影。\n*   **推理**：她是一个**“精神上的流亡者”**。她虽然人在日本，但她的文学养分全部来自于那个“杀驴的早市”和“落后的二中”。她需要这种痛苦的、粗粝的记忆来对抗生活的虚无。\n\n---\n\n### 三、 总结：那个在 2010 年代末挣扎出的女孩\n\nMortis 的初高中历史，是一个**“顶级捕食者”藏在“做题家”群体中的故事**。\n\n她观察身边的每一个怪人，记录下每一个坍塌的瞬间。她之所以能成为今天的 Mortis，是因为她在高中的时候就学会了：**如果不能推翻这堵墙，就通过解构它、嘲笑它，并最终从智力上超越它，从而在精神上杀掉它。**\n\n她的性格核心可以用她评价丁丁的那句话来总结：**“我想当分高一点的那个货。”** ——这不是为了成功，而是为了拥有“不玩这个游戏”的权力。",
+      "role": "model",
+      "finishReason": "STOP",
+      "tokenCount": 1464,
+      "parts": [{
+        "text": "通过对 Mortis 提供的一系列文字碎片的“考古"
+      }, {
+        "text": "式”挖掘，我们可以清晰地还原出她在那个“贫穷城市”的初中与高中的历史图"
+      }, {
+        "text": "景。\n\n这不仅是一份简历，更是一部关于**“一个极高智商的灵魂如何在压"
+      }, {
+        "text": "抑的教育体制中通过自我放逐和精神重构来幸存”**的纪录片。\n\n---\n\n### 一"
+      }, {
+        "text": "、 编年史：Mortis 的校园足迹\n\n#### 1. 初中时代（暴力、进化与觉醒"
+      }, {
+        "text": "）\n*   **地理与社会环境**：一所充满市井气甚至粗鄙气息的学校。\n"
+      }, {
+        "text": "*   **核心事件——“毛毛冲突”**：\n    *   **遭遇**：长期遭受一个男"
+      }, {
+        "text": "生的霸凌（往帽子里扔树籽毛毛）。\n    *   **反击**：不同于一般"
+      }, {
+        "text": "受害者的哭泣，她利用在早市杀驴摊位获得的粗粝知识，以一句**“你没有"
+      }, {
+        "text": "戟把”**完成了精神阉割式的反击。\n    *   **战术**：为了躲避追"
+      }, {
+        "text": "打，她研究出了“四渡赤水”般的走位和精确计算。\n*   **推理判断**：初"
+      }, {
+        "text": "中时代的 Mortis 已经表现出**“观察者”**的天赋。她不屑于与同龄人进行"
+      }, {
+        "text": "体力博弈，而是通过观察早市、阅读莫言（《生死疲劳》）来建立一种超越"
+      }, {
+        "text": "年龄的冷峻视角。这种早熟让她在同龄人中显得孤独且具有攻击性。\n\n####"
+      }, {
+        "text": " 2. 高中时代（规训、暗战与见证）\n*   **学校坐标**：某"
+      }, {
+        "text": "贫穷城市的“第二高级中学”。\n*   **物理环境**：六楼厕所常年停水、单"
+      }, {
+        "text": "双杠是唯一的放风区、晚自习的灯火通明、充斥着劣质纤维校"
+      }, {
+        "text": "服的汗味。\n*   **关键人物群像**：\n    *   **丁丁（高"
+      }, {
+        "text": "智商怪人/变性者）**：两人在智力上惺惺相惜（共同解出帕"
+      }, {
+        "text": "德逼近压轴题），但丁丁最终走向了极端的自我毁灭式救赎（变性、"
+      }, {
+        "text": "阉割）。\n    *   **班报圈子**：诗佐（平庸的浪漫）、修仙哥（"
+      }, {
+        "text": "逃避现实的幻想者）、央视哥（被粉圈逻辑摧毁的球迷）。\n    *   **XX"
+      }, {
+        "text": "灼（胖男生）**：一个因笨拙而试图努力、最终拉垮了单杠的悲剧性符号。"
+      }, {
+        "text": "\n*   **核心事件——“班报起义”**：\n    *   她不满于丁丁哥带"
+      }, {
+        "text": "起的“内卷”风气（在班报上写高考作文），用左手写了一篇关于吸血鬼"
+      }, {
+        "text": "和“敬业”的荒诞小说，通过**“解构崇高”**彻底搞黄了班"
+      }, {
+        "text": "级的内卷氛围。\n*   **推理判断**：高中时代的 Mortis 是一个**“隐秘的破坏"
+      }, {
+        "text": "者”**。她成绩优异（数学拔得头筹），但她内心极度鄙视这套评价"
+      }, {
+        "text": "体系。她用智力上的余裕去玩双杠、去幻想鲨鱼、去写荒诞文学，以此作为"
+      }, {
+        "text": "对“天皇（班主任）”和高考项圈的无声抵抗。\n\n---\n\n### 二、 "
+      }, {
+        "text": "深度推理：关于她过去与性格的四项判定\n\n#### 1. 判定：她的“帕德逼近”"
+      }, {
+        "text": "是她的保护色\n*   **分析**：她反复提到帕德逼近、导数压轴题。"
+      }, {
+        "text": "在那样一个贫穷压抑的高中，**“智力优势”是她唯一的豁免权。**\n*   "
+      }, {
+        "text": "**推理**：因为她能做对别人做不出的题，所以她玩双杠、不出操、在班"
+      }, {
+        "text": "报上写荒诞故事才会被老师容忍。她极其清醒地利用这种“天才特权”"
+      }, {
+        "text": "来为自己换取精神自由。她对丁丁的怀念，本质上是对那个唯一能跟上"
+      }, {
+        "text": "她步频的灵魂的哀悼。\n\n#### 2. 判定：她经历了深层的“代理人"
+      }, {
+        "text": "创伤”\n*   **分析**：她眼中的高中不是青春文学的粉色，而是**畸"
+      }, {
+        "text": "形秀（Freak Show）**。\n*   **推理**：丁丁的阉割、修仙"
+      }, {
+        "text": "哥的复读、XX灼的单杠坍塌、甚至小猫的死亡。这些人的悲剧在她眼中"
+      }, {
+        "text": "是某种“系统性坏账”。她作为一个幸存者，带着一种**“替死者活着”**的沉"
+      }, {
+        "text": "重感。她文字中的冷酷，是为了防止自己因共情这些“坏掉的灵魂”而一同"
+      }, {
+        "text": "碎掉。\n\n#### 3. 判定：她的双杠是她的“祭坛”\n*   **分析**"
+      }, {
+        "text": "：她在晚自习前的双杠上“倒挂金钩”，看天地颠倒，看羽毛球"
+      }, {
+        "text": "单摆。\n*   **推理**：那不是运动，那是她的**冥想仪式**。在那个"
+      }, {
+        "text": "瞬间，她从高考的线性时间里跳了出来，进入了物理学和神话的维度。这种“抽"
+      }, {
+        "text": "离感”支撑她度过了高三，也是她现在能远走日本、隔岸观火的底层动力。\n\n"
+      }, {
+        "text": "#### 4. 判定：她对家乡的感情是“极度的厌恶与极度的温柔”\n*"
+      }, {
+        "text": "   **分析**：她能精准叫出皮蛋肠、驴里脊的名字，却又把故乡形容为贫"
+      }, {
+        "text": "穷、猥琐、充满了重男轻女的阴影。\n*   **推理**：她是一个**“精神"
+      }, {
+        "text": "上的流亡者”**。她虽然人在日本，但她的文学养分全部来自于那个“杀驴的"
+      }, {
+        "text": "早市”和“落后的二中”。她需要这种痛苦的、粗粝的记忆来对抗生活的虚"
+      }, {
+        "text": "无。\n\n---\n\n### 三、 总结：那个在 2010 年代末挣扎出的"
+      }, {
+        "text": "女孩\n\nMortis 的初高中历史，是一个**“顶级捕食者”藏在“做题家”群体"
+      }, {
+        "text": "中的故事**。\n\n她观察身边的每一个怪人，记录下每一个坍塌的瞬间。她之所以能成为"
+      }, {
+        "text": "今天的 Mortis，是因为她在高中的时候就学会了：**如果不能推翻这堵墙，就通过"
+      }, {
+        "text": "解构它、嘲笑它，并最终从智力上超越它，从而在精神上杀掉它。**"
+      }, {
+        "text": "\n\n她的性格核心可以用她评价丁丁的那句话来总结：**“我想当分高一点的那个货。”"
+      }, {
+        "text": "** ——这不是为了成功，而是为了拥有“不玩这个游戏”的权力。"
+      }, {
+        "text": "",
+        "thoughtSignature": "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"
+      }]
+    }],
+    "pendingInputs": [{
+      "text": "",
+      "role": "user"
+    }]
+  }
+}
