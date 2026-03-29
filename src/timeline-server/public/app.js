@@ -62,6 +62,13 @@ function toInputDateTs(inputValue) {
   return d.getTime();
 }
 
+function parseUpvote(value) {
+  const raw = String(value ?? '').trim();
+  if (!raw) return 0;
+  const num = Number(raw.replace(/[^\d.-]/g, ''));
+  return Number.isFinite(num) ? num : 0;
+}
+
 function parseDateTime(text, filename = '') {
   if (typeof text === 'string') {
     const t = text.trim();
@@ -327,10 +334,17 @@ function applyFilters() {
       );
     })
     .sort((a, b) => {
+      const sortType = refs.sort.value;
+      if (sortType === 'upvote-asc') {
+        return a.upvote - b.upvote;
+      }
+      if (sortType === 'upvote-desc') {
+        return b.upvote - a.upvote;
+      }
       if (a.timestamp === null && b.timestamp === null) return 0;
       if (a.timestamp === null) return 1;
       if (b.timestamp === null) return -1;
-      return refs.sort.value === 'asc' ? a.timestamp - b.timestamp : b.timestamp - a.timestamp;
+      return sortType === 'time-asc' ? a.timestamp - b.timestamp : b.timestamp - a.timestamp;
     });
 
   renderTimeline(filteredItems);
@@ -354,6 +368,7 @@ async function readTimelineFromDirectory() {
         author: meta.author || '未知作者',
         createdText: formatTs(ts),
         timestamp: ts,
+        upvote: parseUpvote(meta.upvote_num),
         body,
         searchBody: '',
         meta: {
