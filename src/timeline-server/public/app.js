@@ -15,6 +15,14 @@ const refs = {
   article: document.querySelector('#article'),
 };
 
+function ensureRequiredRefs() {
+  if (!refs.analysisGranularity) {
+    throw new Error('分析粒度选择控件未找到：#analysis-granularity');
+  }
+}
+
+ensureRequiredRefs();
+
 const fsAccessSupported = typeof window.showDirectoryPicker === 'function';
 let selectedRootHandle = null;
 let extractedDirHandle = null;
@@ -25,10 +33,6 @@ let reloadTimer = null;
 let analysisVisible = false;
 const MIN_CHART_BAR_HEIGHT = 8;
 const MAX_CHART_BAR_HEIGHT = 150;
-
-if (!refs.analysisGranularity) {
-  throw new Error('分析粒度选择控件未找到：#analysis-granularity');
-}
 
 function escapeHtml(input) {
   return String(input)
@@ -608,7 +612,7 @@ refs.analysisBtn.addEventListener('click', () => {
   }
 });
 
-refs.analysisGranularity?.addEventListener('change', () => {
+refs.analysisGranularity.addEventListener('change', () => {
   if (!analysisVisible) return;
   renderAnalysisChart(filteredItems);
 });
