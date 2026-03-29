@@ -53,15 +53,14 @@ function formatTs(ts) {
   return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
 }
 
-function toInputDateTs(inputValue, isEnd) {
+function toInputDateTs(inputValue) {
   if (!inputValue) return null;
   const d = new Date(inputValue);
   if (Number.isNaN(d.getTime())) return null;
-  if (!isEnd) return d.getTime();
   return d.getTime();
 }
 
-function parseDateTime(text, fileName = '') {
+function parseDateTime(text, filename = '') {
   if (typeof text === 'string') {
     const t = text.trim();
     if (t) {
@@ -99,7 +98,7 @@ function parseDateTime(text, fileName = '') {
     }
   }
 
-  const fileMatch = String(fileName).match(/_(\d{4}-\d{2}-\d{2})_/);
+  const fileMatch = String(filename).match(/_(\d{4}-\d{2}-\d{2})_/);
   if (fileMatch) {
     const date = new Date(`${fileMatch[1]}T00:00:00`);
     const ts = date.getTime();
@@ -307,8 +306,8 @@ function renderTimeline(items) {
 }
 
 function applyFilters() {
-  const startTs = toInputDateTs(refs.start.value, false);
-  const endTs = toInputDateTs(refs.end.value, true);
+  const startTs = toInputDateTs(refs.start.value);
+  const endTs = toInputDateTs(refs.end.value);
   const query = refs.search.value.trim().toLowerCase();
 
   filteredItems = allItems
@@ -316,10 +315,13 @@ function applyFilters() {
       if (startTs !== null && (item.timestamp === null || item.timestamp < startTs)) return false;
       if (endTs !== null && (item.timestamp === null || item.timestamp > endTs)) return false;
       if (!query) return true;
+      if (!item.searchBody) {
+        item.searchBody = (item.body || '').replace(/\s+/g, ' ').toLowerCase();
+      }
       return (
         item.title.toLowerCase().includes(query)
         || item.author.toLowerCase().includes(query)
-        || item.bodyText.toLowerCase().includes(query)
+        || item.searchBody.includes(query)
       );
     })
     .sort((a, b) => {
@@ -343,7 +345,7 @@ async function readTimelineFromDirectory() {
       const file = await entry.getFile();
       const raw = await file.text();
       const { meta, body } = parseFrontMatter(raw);
-      const ts = parseDateTime(meta.created || meta.modified, entry.name);
+      const ts = parseDateTime(meta.created || meta.modified || '', entry.name);
       rows.push({
         id: entry.name,
         title: meta.title || entry.name.replace(/\.md$/i, ''),
@@ -351,7 +353,7 @@ async function readTimelineFromDirectory() {
         createdText: formatTs(ts),
         timestamp: ts,
         body,
-        bodyText: body.replace(/\s+/g, ' ').toLowerCase(),
+        searchBody: '',
         meta: {
           ...meta,
           created: formatTs(ts),
@@ -402,7 +404,11 @@ async function openDirectory() {
     await readTimelineFromDirectory();
   } catch (error) {
     if (error?.name === 'AbortError') return;
-    alert('目录读取失败：请确认选择的是包含 extracted_mds 的目录。');
+    if (error?.name === 'NotFoundError') {
+      alert('目录读取失败：所选目录中未找到 extracted_mds 子目录。');
+      return;
+    }
+    alert('目录读取失败：请确认你已授予目录读取权限并重试。');
     console.error(error);
   } finally {
     setLoading(false);
