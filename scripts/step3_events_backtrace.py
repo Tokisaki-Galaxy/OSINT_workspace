@@ -68,6 +68,7 @@ PERIOD_ALIAS = {
 }
 
 BREAKPOINT_PERIODS = ['童年', '小学', '初中', '高中', '大学', '青年早期', '工作后', '近期']
+MAX_DESCRIPTIONS_PER_SAMPLE = 2
 
 
 def canonical_period(period: str) -> str:
@@ -113,7 +114,7 @@ def main():
         items = period_map.get(p, [])
         items_sorted = sorted(items, key=lambda x: len(x[1]), reverse=True)[:5]
         for e, ds in items_sorted:
-            sample = '；'.join(ds[:2]) if ds else '不确定'
+            sample = '；'.join(ds[:MAX_DESCRIPTIONS_PER_SAMPLE]) if ds else '不确定'
             style = infer_explanation_style(ds)
             lines.append(f'| {p} | {e} | {len(ds)} | {sample} | {style} |')
         if not items_sorted:
@@ -133,4 +134,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
