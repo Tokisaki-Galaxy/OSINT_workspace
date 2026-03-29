@@ -475,10 +475,13 @@ refs.timelineList.addEventListener('keydown', (event) => {
   event.preventDefault();
 
   const currentIndex = filteredItems.findIndex((item) => item.id === activeId);
-  const fallbackIndex = currentIndex >= 0 ? currentIndex : 0;
+  if (currentIndex < 0) {
+    void selectArticle(filteredItems[0].id);
+    return;
+  }
   const nextIndex = event.key === 'ArrowUp'
-    ? Math.max(0, fallbackIndex - 1)
-    : Math.min(filteredItems.length - 1, fallbackIndex + 1);
+    ? Math.max(0, currentIndex - 1)
+    : Math.min(filteredItems.length - 1, currentIndex + 1);
   const nextItem = filteredItems[nextIndex];
   if (nextItem && nextItem.id !== activeId) {
     void selectArticle(nextItem.id);
