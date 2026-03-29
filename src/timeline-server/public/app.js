@@ -36,6 +36,11 @@ let analysisVisible = false;
 const MIN_CHART_BAR_HEIGHT = 8;
 const MAX_CHART_BAR_HEIGHT = 150;
 const VALID_GRANULARITIES = ['day', 'month', 'year'];
+const MAX_VISIBLE_LABELS_BY_GRANULARITY = {
+  day: 12,
+  month: 10,
+  year: 8,
+};
 
 function escapeHtml(input) {
   return String(input)
@@ -114,6 +119,24 @@ function getGranularityUnit(granularity) {
     throw new Error(`不支持的统计粒度单位映射：${granularity}`);
   }
   return unit;
+}
+
+function getLabelDisplayStep(totalBuckets, granularity) {
+  if (totalBuckets <= 0) return 1;
+  if (!VALID_GRANULARITIES.includes(granularity)) {
+    throw new Error(`不支持的标签显示粒度：${granularity}`);
+  }
+  const maxVisible = MAX_VISIBLE_LABELS_BY_GRANULARITY[granularity];
+  return Math.max(1, Math.ceil(totalBuckets / maxVisible));
+}
+
+function shouldShowBucketLabel(index, total, step) {
+  if (index % step === 0) return true;
+  const lastIndex = total - 1;
+  if (index !== lastIndex) return false;
+  const previousVisible = Math.floor(lastIndex / step) * step;
+  const distance = lastIndex - previousVisible;
+  return distance >= Math.ceil(step / 2);
 }
 
 function toInputDateTs(inputValue) {
@@ -437,13 +460,19 @@ function renderAnalysisChart(items) {
   }
   const unit = getGranularityUnit(granularity);
   refs.analysisSummary.textContent = `Y轴：文章量（共 ${points.length} ${unit}，${items.length} 篇）`;
+  const shouldStretch = granularity === 'month' || granularity === 'year';
+  refs.analysisChart.classList.toggle('stretch-layout', shouldStretch);
+  const labelStep = getLabelDisplayStep(points.length, granularity);
 
-  for (const point of points) {
+  for (let index = 0; index < points.length; index += 1) {
+    const point = points[index];
     const bar = document.createElement('button');
     bar.type = 'button';
     bar.className = 'chart-bar';
     bar.dataset.bucket = point.bucket;
     bar.dataset.active = 'false';
+    bar.dataset.label = point.bucket;
+    bar.dataset.showLabel = shouldShowBucketLabel(index, points.length, labelStep) ? 'true' : 'false';
     bar.style.height = `${Math.max(
       MIN_CHART_BAR_HEIGHT,
       Math.round((point.count / maxCount) * MAX_CHART_BAR_HEIGHT),

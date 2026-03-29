@@ -425,6 +425,16 @@ button:focus-visible {
   padding-bottom: 22px;
 }
 
+.analysis-chart.stretch-layout {
+  width: 100%;
+}
+
+.analysis-chart.stretch-layout .chart-bar {
+  width: 100%;
+  min-width: 0;
+  flex: 1 1 0;
+}
+
 .chart-bar {
   width: 16px;
   min-width: 16px;
@@ -441,7 +451,7 @@ button:focus-visible {
 }
 
 .chart-bar::after {
-  content: attr(data-bucket);
+  content: attr(data-label);
   position: absolute;
   bottom: -20px;
   left: 50%;
@@ -449,6 +459,10 @@ button:focus-visible {
   font-size: 10px;
   color: var(--muted);
   white-space: nowrap;
+}
+
+.chart-bar[data-show-label='false']::after {
+  content: '';
 }
 
 .chart-bar[data-active='true'] {
