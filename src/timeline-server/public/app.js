@@ -648,6 +648,7 @@ function debounceReload() {
 
 function handleTimelineArrowNavigation(event) {
   if (!filteredItems.length) return;
+  if (event.defaultPrevented) return;
   if (event.key !== 'ArrowUp' && event.key !== 'ArrowDown') return;
   event.preventDefault();
 
