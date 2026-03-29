@@ -123,8 +123,20 @@ function getGranularityUnit(granularity) {
 
 function getLabelDisplayStep(totalBuckets, granularity) {
   if (totalBuckets <= 0) return 1;
-  const maxVisible = MAX_VISIBLE_LABELS_BY_GRANULARITY[granularity] || 10;
+  if (!VALID_GRANULARITIES.includes(granularity)) {
+    throw new Error(`不支持的标签显示粒度：${granularity}`);
+  }
+  const maxVisible = MAX_VISIBLE_LABELS_BY_GRANULARITY[granularity];
   return Math.max(1, Math.ceil(totalBuckets / maxVisible));
+}
+
+function shouldShowBucketLabel(index, total, step) {
+  if (index % step === 0) return true;
+  const lastIndex = total - 1;
+  if (index !== lastIndex) return false;
+  const previousVisible = Math.floor(lastIndex / step) * step;
+  const distance = lastIndex - previousVisible;
+  return distance >= Math.ceil(step / 2);
 }
 
 function toInputDateTs(inputValue) {
@@ -452,15 +464,15 @@ function renderAnalysisChart(items) {
   refs.analysisChart.classList.toggle('stretch-layout', shouldStretch);
   const labelStep = getLabelDisplayStep(points.length, granularity);
 
-  points.forEach((point, index) => {
+  for (let index = 0; index < points.length; index += 1) {
+    const point = points[index];
     const bar = document.createElement('button');
     bar.type = 'button';
     bar.className = 'chart-bar';
     bar.dataset.bucket = point.bucket;
     bar.dataset.active = 'false';
     bar.dataset.label = point.bucket;
-    const isLast = index === points.length - 1;
-    bar.dataset.showLabel = index % labelStep === 0 || isLast ? 'true' : 'false';
+    bar.dataset.showLabel = shouldShowBucketLabel(index, points.length, labelStep) ? 'true' : 'false';
     bar.style.height = `${Math.max(
       MIN_CHART_BAR_HEIGHT,
       Math.round((point.count / maxCount) * MAX_CHART_BAR_HEIGHT),
@@ -481,7 +493,7 @@ function renderAnalysisChart(items) {
       highlightChartByBucket(point.bucket);
     });
     refs.analysisChart.appendChild(bar);
-  });
+  }
 
   const current = filteredItems.find((item) => item.id === activeId);
   if (current) {
