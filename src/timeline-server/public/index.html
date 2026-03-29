@@ -15,6 +15,8 @@
         </div>
 
         <div class="toolbar-right">
+          <button id="analysis-btn" type="button" class="secondary-btn">分析</button>
+
           <label class="field compact">
             <span>排序</span>
             <select id="sort">
@@ -38,6 +40,14 @@
           <button id="open-dir-btn" type="button" class="primary-btn">打开目录</button>
         </div>
       </header>
+
+      <section id="analysis-panel" class="analysis-panel card" hidden>
+        <div class="analysis-head">
+          <h2>时间堆积图</h2>
+          <p id="analysis-summary" class="analysis-summary">按日期统计文章量</p>
+        </div>
+        <div id="analysis-chart" class="analysis-chart"></div>
+      </section>
 
       <main class="main-layout">
         <aside class="left-pane card">
