@@ -670,11 +670,11 @@ function handleTimelineArrowNavigation(event) {
 
 function isFormField(element) {
   if (!element) return false;
-  const tag = element.tagName;
+  const tag = element.tagName?.toLowerCase();
   return (
-    tag === 'INPUT'
-    || tag === 'TEXTAREA'
-    || tag === 'SELECT'
+    tag === 'input'
+    || tag === 'textarea'
+    || tag === 'select'
     || element.isContentEditable
   );
 }
@@ -711,7 +711,6 @@ refs.timelineList.addEventListener('click', () => {
 refs.rightPane.addEventListener('click', () => {
   refs.rightPane.focus({ preventScroll: true });
 });
-refs.timelineList.addEventListener('keydown', handleTimelineArrowNavigation);
 window.addEventListener(
   'keydown',
   (event) => {
