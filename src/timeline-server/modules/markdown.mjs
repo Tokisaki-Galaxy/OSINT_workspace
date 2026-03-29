@@ -24,7 +24,7 @@ function safeHref(href) {
 }
 
 function imagePlaceholder() {
-  return `<div class="md-image-placeholder">【🖼 图片已省略】</div>`;
+  return `<div class="md-image-placeholder" role="img" aria-label="图片已省略"><span aria-hidden="true">【🖼 图片已省略】</span></div>`;
 }
 
 function replaceImageBlocks(markdown) {
