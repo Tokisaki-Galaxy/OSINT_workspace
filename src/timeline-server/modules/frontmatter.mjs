@@ -19,7 +19,7 @@ export function parseFrontMatter(rawText) {
 
   for (const line of headerLines) {
     const idx = line.indexOf(':');
-    if (idx === -1) continue;
+    if (idx <= 0) continue;
     const key = line.slice(0, idx).trim();
     const value = line.slice(idx + 1).trim();
     if (!key) continue;
