@@ -65,7 +65,10 @@ function toInputDateTs(inputValue) {
 function parseUpvote(value) {
   const raw = String(value ?? '').trim();
   if (!raw) return 0;
-  const num = Number(raw.replace(/[^\d.-]/g, ''));
+  const cleaned = raw.replace(/,/g, '');
+  const matched = cleaned.match(/-?\d+(?:\.\d+)?/);
+  if (!matched) return 0;
+  const num = Number.parseFloat(matched[0]);
   return Number.isFinite(num) ? num : 0;
 }
 
@@ -336,9 +339,21 @@ function applyFilters() {
     .sort((a, b) => {
       const sortType = refs.sort.value;
       if (sortType === 'upvote-asc') {
+        if (a.upvote === b.upvote) {
+          if (a.timestamp === null && b.timestamp === null) return 0;
+          if (a.timestamp === null) return 1;
+          if (b.timestamp === null) return -1;
+          return b.timestamp - a.timestamp;
+        }
         return a.upvote - b.upvote;
       }
       if (sortType === 'upvote-desc') {
+        if (a.upvote === b.upvote) {
+          if (a.timestamp === null && b.timestamp === null) return 0;
+          if (a.timestamp === null) return 1;
+          if (b.timestamp === null) return -1;
+          return b.timestamp - a.timestamp;
+        }
         return b.upvote - a.upvote;
       }
       if (a.timestamp === null && b.timestamp === null) return 0;
