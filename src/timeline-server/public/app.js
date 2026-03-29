@@ -26,6 +26,10 @@ let analysisVisible = false;
 const MIN_CHART_BAR_HEIGHT = 8;
 const MAX_CHART_BAR_HEIGHT = 150;
 
+if (!refs.analysisGranularity) {
+  throw new Error('分析粒度选择控件未找到：#analysis-granularity');
+}
+
 function escapeHtml(input) {
   return String(input)
     .replaceAll('&', '&amp;')
@@ -84,6 +88,10 @@ function formatYearOnly(ts) {
   const d = new Date(ts);
   if (Number.isNaN(d.getTime())) return '';
   return String(d.getFullYear());
+}
+
+function getCurrentGranularity() {
+  return refs.analysisGranularity.value;
 }
 
 function toInputDateTs(inputValue) {
@@ -353,7 +361,7 @@ function renderTimeline(items) {
 }
 
 function getBucketLabelByItem(item) {
-  const granularity = refs.analysisGranularity?.value || 'day';
+  const granularity = getCurrentGranularity();
   if (granularity === 'year') return formatYearOnly(item.timestamp);
   if (granularity === 'month') return formatMonthOnly(item.timestamp);
   return formatDateOnly(item.timestamp);
@@ -384,7 +392,7 @@ function renderAnalysisChart(items) {
   }
 
   const countMap = new Map();
-  const granularity = refs.analysisGranularity?.value || 'day';
+  const granularity = getCurrentGranularity();
   for (const item of items) {
     const bucket = getBucketLabelByItem(item);
     if (!bucket) continue;
