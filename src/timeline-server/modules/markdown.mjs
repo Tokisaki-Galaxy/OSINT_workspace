@@ -24,7 +24,7 @@ function safeHref(href) {
 }
 
 function svgPlaceholder() {
-  return `<div class="md-image-placeholder" role="img" aria-label="图片已替换为占位图"><svg viewBox="0 0 420 180" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#e8f0ff"/><stop offset="100%" stop-color="#d9f6f2"/></linearGradient></defs><rect x="0" y="0" width="420" height="180" rx="16" fill="url(#g)"/><g fill="none" stroke="#6b7280" stroke-width="2.5"><rect x="38" y="38" width="344" height="104" rx="12"/><path d="M66 122l72-50 58 42 46-30 52 38"/><circle cx="123" cy="76" r="14"/></g><text x="210" y="156" text-anchor="middle" fill="#475569" font-size="14" font-family="Segoe UI, Arial">Image removed • 图片已移除</text></svg></div>`;
+  return `<div class="md-image-placeholder" role="img" aria-label="图片已替换为占位文字">【🖼 图片已省略】</div>`;
 }
 
 function replaceImageBlocks(markdown) {
