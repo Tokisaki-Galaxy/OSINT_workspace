@@ -341,6 +341,13 @@ function highlightChartByDate(dateText) {
   }
 }
 
+function findTimelineNodeById(id) {
+  for (const node of refs.timelineList.querySelectorAll('.timeline-item')) {
+    if (node.dataset.id === id) return node;
+  }
+  return null;
+}
+
 function renderAnalysisChart(items) {
   refs.analysisChart.innerHTML = '';
   if (!items.length) {
@@ -386,7 +393,7 @@ function renderAnalysisChart(items) {
     bar.addEventListener('click', () => {
       const target = findFirstItemByDate(point.date);
       if (!target) return;
-      const targetNode = refs.timelineList.querySelector(`[data-id="${CSS.escape(target.id)}"]`);
+      const targetNode = findTimelineNodeById(target.id);
       if (!targetNode) {
         void selectArticle(target.id);
         highlightChartByDate(point.date);
