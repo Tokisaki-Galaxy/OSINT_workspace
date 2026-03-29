@@ -16,16 +16,9 @@ const refs = {
 };
 
 function ensureRequiredRefs() {
-  const requiredSelectors = [
-    ['analysisGranularity', '#analysis-granularity'],
-    ['analysisSummary', '#analysis-summary'],
-    ['analysisChart', '#analysis-chart'],
-    ['analysisPanel', '#analysis-panel'],
-    ['analysisBtn', '#analysis-btn'],
-  ];
-  for (const [key, selector] of requiredSelectors) {
-    if (!refs[key]) {
-      throw new Error(`必需元素未找到：${selector}`);
+  for (const [key, value] of Object.entries(refs)) {
+    if (!value) {
+      throw new Error(`必需元素未找到：${key}`);
     }
   }
 }
@@ -42,6 +35,7 @@ let reloadTimer = null;
 let analysisVisible = false;
 const MIN_CHART_BAR_HEIGHT = 8;
 const MAX_CHART_BAR_HEIGHT = 150;
+const VALID_GRANULARITIES = ['day', 'month', 'year'];
 
 function escapeHtml(input) {
   return String(input)
@@ -105,7 +99,7 @@ function formatYearOnly(ts) {
 
 function getCurrentGranularity() {
   const value = refs.analysisGranularity.value;
-  if (value === 'day' || value === 'month' || value === 'year') return value;
+  if (VALID_GRANULARITIES.includes(value)) return value;
   throw new Error(`不支持的统计粒度：${value}`);
 }
 
