@@ -16,8 +16,17 @@ const refs = {
 };
 
 function ensureRequiredRefs() {
-  if (!refs.analysisGranularity) {
-    throw new Error('分析粒度选择控件未找到：#analysis-granularity');
+  const requiredSelectors = [
+    ['analysisGranularity', '#analysis-granularity'],
+    ['analysisSummary', '#analysis-summary'],
+    ['analysisChart', '#analysis-chart'],
+    ['analysisPanel', '#analysis-panel'],
+    ['analysisBtn', '#analysis-btn'],
+  ];
+  for (const [key, selector] of requiredSelectors) {
+    if (!refs[key]) {
+      throw new Error(`必需元素未找到：${selector}`);
+    }
   }
 }
 
@@ -96,6 +105,15 @@ function formatYearOnly(ts) {
 
 function getCurrentGranularity() {
   return refs.analysisGranularity.value;
+}
+
+function getGranularityUnit(granularity) {
+  const unitMap = {
+    day: '天',
+    month: '月',
+    year: '年',
+  };
+  return unitMap[granularity] || '天';
 }
 
 function toInputDateTs(inputValue) {
@@ -417,7 +435,7 @@ function renderAnalysisChart(items) {
     refs.analysisSummary.textContent = '没有可统计的有效日期数据';
     return;
   }
-  const unit = granularity === 'year' ? '年' : granularity === 'month' ? '月' : '天';
+  const unit = getGranularityUnit(granularity);
   refs.analysisSummary.textContent = `Y轴：文章量（共 ${points.length} ${unit}，${items.length} 篇）`;
 
   for (const point of points) {
