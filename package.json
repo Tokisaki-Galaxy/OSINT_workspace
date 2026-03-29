@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "timeline:start": "node ./src/timeline-server/server.mjs",
-    "timeline:deploy": "vercel --prod"
+    "timeline:dev": "node ./src/timeline-server/server.mjs",
+    "timeline:start": "pnpm run timeline:dev"
   },
   "keywords": [],
   "author": "",
