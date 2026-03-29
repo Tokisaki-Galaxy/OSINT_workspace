@@ -74,8 +74,9 @@ function renderTimeline(items) {
   for (const item of items) {
     const li = document.createElement('li');
     li.dataset.id = item.id;
+    const created = item.created || '时间未知';
     li.innerHTML = `
-      <div class="item-time">${escapeHtml(item.created)} · ${escapeHtml(item.location || '未知')}</div>
+      <div class="item-time">${escapeHtml(created)} · ${escapeHtml(item.location || '未知')}</div>
       <div class="item-title">${escapeHtml(item.title)}</div>
     `;
     li.addEventListener('click', () => selectArticle(item.id));
@@ -166,7 +167,11 @@ for (const input of [refs.sort, refs.start, refs.end]) {
     try {
       await loadTimeline();
     } catch (error) {
-      console.error(error);
+      console.error(
+        'Failed to refresh timeline with filters:',
+        { sort: refs.sort.value, start: refs.start.value, end: refs.end.value },
+        error,
+      );
     }
   });
 }

@@ -7,9 +7,17 @@ import { fromDateTimeLocal, normalizeDateTime, toTimestamp } from './time.mjs';
 
 const ROOT_SCAN_DEPTH = 3;
 
+export class AppError extends Error {
+  constructor(message, status = 500) {
+    super(message);
+    this.name = 'AppError';
+    this.status = status;
+  }
+}
+
 function ensureAbsoluteRoot(rootPath) {
   if (!rootPath || !path.isAbsolute(rootPath)) {
-    throw new Error('rootPath 必须是绝对路径');
+    throw new AppError('rootPath 必须是绝对路径', 400);
   }
   return path.resolve(rootPath);
 }
@@ -64,26 +72,34 @@ export async function getTimeline({ rootPath, sort = 'desc', start, end }) {
       const fullPath = path.join(extractedDir, fileName);
       const raw = await fs.readFile(fullPath, 'utf8');
       const { meta } = parseFrontMatter(raw);
-      const created = normalizeDateTime(meta.created, fileName) ?? '时间未知';
+      const created = normalizeDateTime(meta.created, fileName);
       const ts = toTimestamp(created);
       return {
         id: fileName,
         fileName,
         title: meta.title || fileName.replace(/\.md$/, ''),
-        created,
-        timestamp: ts ?? -Infinity,
+        created: created ?? '',
+        timestamp: ts,
         location: meta.location || '未知',
       };
     }),
   );
 
   const filtered = rows.filter((row) => {
+    if (row.timestamp === null) {
+      return startTs === null && endTs === null;
+    }
     if (startTs !== null && row.timestamp < startTs) return false;
     if (endTs !== null && row.timestamp > endTs) return false;
     return true;
   });
 
-  filtered.sort((a, b) => (sort === 'asc' ? a.timestamp - b.timestamp : b.timestamp - a.timestamp));
+  filtered.sort((a, b) => {
+    if (a.timestamp === null && b.timestamp === null) return 0;
+    if (a.timestamp === null) return 1;
+    if (b.timestamp === null) return -1;
+    return sort === 'asc' ? a.timestamp - b.timestamp : b.timestamp - a.timestamp;
+  });
 
   return {
     total: filtered.length,
@@ -94,12 +110,15 @@ export async function getTimeline({ rootPath, sort = 'desc', start, end }) {
 export async function getArticle({ rootPath, id }) {
   const root = ensureAbsoluteRoot(rootPath);
   const rawId = String(id || '');
+  const posixId = rawId.replaceAll('\\', '/');
+  const rawParts = posixId.split('/');
+  const hasTraversalAttempt = rawParts.includes('..') || rawParts.includes('.');
   const normalizedId = path.posix.normalize(rawId.replaceAll('\\', '/'));
   const safeName = path.basename(normalizedId);
-  const hasUnsafeSegments =
-    normalizedId.includes('..') || normalizedId.startsWith('/') || normalizedId.includes('\0');
-  if (!safeName.endsWith('.md') || safeName !== normalizedId || hasUnsafeSegments) {
-    throw new Error('文章 ID 非法');
+  const isUnsafePath =
+    hasTraversalAttempt || normalizedId.startsWith('/') || normalizedId.includes('\0');
+  if (!safeName.endsWith('.md') || safeName !== normalizedId || isUnsafePath) {
+    throw new AppError('文章 ID 非法', 400);
   }
 
   const fullPath = path.join(root, 'extracted_mds', safeName);

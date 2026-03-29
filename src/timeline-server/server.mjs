@@ -3,9 +3,13 @@ import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import { URL } from 'node:url';
 
-import { getArticle, getRootOptions, getTimeline } from './modules/service.mjs';
+import { AppError, getArticle, getRootOptions, getTimeline } from './modules/service.mjs';
 
-const PORT = Number(process.env.PORT || 3986);
+const rawPort = process.env.PORT ?? '3986';
+const PORT = Number(rawPort);
+if (!Number.isInteger(PORT) || PORT <= 0 || PORT > 65535) {
+  throw new Error(`PORT must be a valid number between 1 and 65535, got: ${rawPort}`);
+}
 const PUBLIC_DIR = path.resolve(process.cwd(), 'src/timeline-server/public');
 
 const MIME_TYPES = {
@@ -26,12 +30,10 @@ function sendJson(res, status, payload) {
 }
 
 function getErrorStatus(error) {
-  if (!(error instanceof Error)) return 500;
-  if (error.message.includes('非法') || error.message.includes('绝对路径')) {
-    return 400;
-  }
-  if (/ENOENT|ENOTDIR/.test(error.message)) {
-    return 404;
+  if (error instanceof AppError) return error.status;
+  if (error && typeof error === 'object' && 'code' in error) {
+    const code = error.code;
+    if (code === 'ENOENT' || code === 'ENOTDIR') return 404;
   }
   return 500;
 }
@@ -39,7 +41,8 @@ function getErrorStatus(error) {
 async function sendStatic(res, pathname) {
   const filePath = path.join(PUBLIC_DIR, pathname === '/' ? 'index.html' : pathname.slice(1));
   const normalized = path.resolve(filePath);
-  if (!normalized.startsWith(PUBLIC_DIR)) {
+  const publicBase = `${PUBLIC_DIR}${path.sep}`;
+  if (normalized !== PUBLIC_DIR && !normalized.startsWith(publicBase)) {
     res.writeHead(403);
     res.end('Forbidden');
     return;

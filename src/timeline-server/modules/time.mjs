@@ -31,8 +31,7 @@ export function toTimestamp(dateTimeText) {
 
 export function fromDateTimeLocal(input) {
   if (!input) return null;
-  const normalized = input.includes(':') ? input : `${input}:00`;
-  const m = normalized.match(/^(\d{4}-\d{2}-\d{2})T(\d{2}):(\d{2})(?::(\d{2}))?$/);
+  const m = String(input).trim().match(/^(\d{4}-\d{2}-\d{2})T(\d{2}):(\d{2})(?::(\d{2}))?$/);
   if (!m) return null;
   const [, d, hh, mm, ss = '00'] = m;
   return `${d} ${hh}:${mm}:${ss}`;
