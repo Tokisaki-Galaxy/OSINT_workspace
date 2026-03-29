@@ -1,0 +1,10 @@
+特征表       → analysis_features.csv（780 行）
+短回答表     → short_answers.csv（835 条）
+生命事件表   → events.csv（去重后 1732 条）
+主题频率表   → theme_summary.csv（2619 个词）
+滑动窗口曲线 → temporal_sliding.csv（776 个窗口）
+
+── LLM 分析摘要（共 780 篇） ──
+  理智化防御：14 篇 (1.8%)
+  投射防御：  192 篇 (24.6%)
+  叙事主体分布：{'主动': 390, '被动': 354, '混合': 36}
