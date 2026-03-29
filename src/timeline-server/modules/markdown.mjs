@@ -42,6 +42,18 @@ function renderInline(text) {
   return html;
 }
 
+function renderLineWithPlaceholders(line) {
+  const marker = '__IMG_PLACEHOLDER__';
+  if (!line.includes(marker)) {
+    return renderInline(line);
+  }
+
+  return line
+    .split(marker)
+    .map((chunk) => renderInline(chunk))
+    .join(svgPlaceholder());
+}
+
 export function renderMarkdown(markdown) {
   const withMarkers = replaceImageBlocks(markdown);
   const blocks = withMarkers.replace(/\r\n/g, '\n').split(/\n{2,}/);
@@ -78,9 +90,7 @@ export function renderMarkdown(markdown) {
       continue;
     }
 
-    const paragraph = lines
-      .map((line) => (line.trim() === '__IMG_PLACEHOLDER__' ? svgPlaceholder() : renderInline(line)))
-      .join('<br/>');
+    const paragraph = lines.map((line) => renderLineWithPlaceholders(line)).join('<br/>');
     htmlBlocks.push(`<p>${paragraph}</p>`);
   }
 
