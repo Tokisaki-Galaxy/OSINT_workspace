@@ -19,13 +19,14 @@ export function normalizeDateTime(text, fallbackFileName = '') {
     return `${fromFile[1]} 00:00:00`;
   }
 
-  return '1970-01-01 00:00:00';
+  return null;
 }
 
 export function toTimestamp(dateTimeText) {
+  if (!dateTimeText) return null;
   const iso = dateTimeText.replace(' ', 'T');
   const ts = Date.parse(iso);
-  return Number.isNaN(ts) ? 0 : ts;
+  return Number.isNaN(ts) ? null : ts;
 }
 
 export function fromDateTimeLocal(input) {

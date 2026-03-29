@@ -8,8 +8,12 @@ function escapeHtml(input) {
 }
 
 function safeHref(href) {
+  if (!/^https?:\/\//i.test(href)) {
+    return '#';
+  }
+
   try {
-    const url = new URL(href, 'http://localhost');
+    const url = new URL(href);
     if (url.protocol === 'http:' || url.protocol === 'https:') {
       return href;
     }

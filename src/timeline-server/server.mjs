@@ -25,6 +25,17 @@ function sendJson(res, status, payload) {
   res.end(body);
 }
 
+function getErrorStatus(error) {
+  if (!(error instanceof Error)) return 500;
+  if (error.message.includes('非法') || error.message.includes('绝对路径')) {
+    return 400;
+  }
+  if (/ENOENT|ENOTDIR/.test(error.message)) {
+    return 404;
+  }
+  return 500;
+}
+
 async function sendStatic(res, pathname) {
   const filePath = path.join(PUBLIC_DIR, pathname === '/' ? 'index.html' : pathname.slice(1));
   const normalized = path.resolve(filePath);
@@ -80,7 +91,7 @@ const server = http.createServer(async (req, res) => {
 
     await sendStatic(res, url.pathname);
   } catch (error) {
-    sendJson(res, 400, {
+    sendJson(res, getErrorStatus(error), {
       error: error instanceof Error ? error.message : 'Unexpected error',
     });
   }

@@ -165,8 +165,8 @@ for (const input of [refs.sort, refs.start, refs.end]) {
     if (!refs.rootPath.value.trim()) return;
     try {
       await loadTimeline();
-    } catch {
-      // 保持静默，避免频繁弹窗
+    } catch (error) {
+      console.error(error);
     }
   });
 }
