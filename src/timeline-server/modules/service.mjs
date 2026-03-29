@@ -78,6 +78,7 @@ export async function getTimeline({ rootPath, sort = 'desc', start, end }) {
         id: fileName,
         fileName,
         title: meta.title || fileName.replace(/\.md$/, ''),
+        author: meta.author || '未知作者',
         created: created ?? '',
         timestamp: ts,
         location: meta.location || '未知',
