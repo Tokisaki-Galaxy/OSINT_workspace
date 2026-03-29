@@ -14,7 +14,8 @@ from src.window_mapper import WindowSpec, expand_window, pick_feature_rows
 BASE = ROOT / '美味小土豆'
 ANALYSIS = BASE / 'analysis_features.csv'
 EXTRACTED = BASE / 'extracted_mds'
-OUT = BASE / 'breakpoint_close_reading.md'
+OUT_DIR = BASE / 'advance_analyse'
+OUT = OUT_DIR / 'breakpoint_close_reading.md'
 
 AGG_BREAKPOINTS = [
     WindowSpec('BP01_2025-10-21', 477, 481),
@@ -91,6 +92,7 @@ def render_block(specs: list[WindowSpec], sorted_rows, heading: str) -> list[str
 
 
 def main():
+    OUT_DIR.mkdir(parents=True, exist_ok=True)
     features = read_analysis_features(str(ANALYSIS))
     sorted_rows = sort_features_by_date(features)
 

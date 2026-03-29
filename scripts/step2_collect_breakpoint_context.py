@@ -14,7 +14,8 @@ from src.window_mapper import WindowSpec, expand_window, pick_feature_rows
 BASE = Path('/home/runner/work/OSINT_workspace/OSINT_workspace/美味小土豆')
 ANALYSIS = BASE / 'analysis_features.csv'
 EXTRACTED = BASE / 'extracted_mds'
-OUT = BASE / 'breakpoint_close_reading_raw.md'
+OUT_DIR = BASE / 'advance_analyse'
+OUT = OUT_DIR / 'breakpoint_close_reading_raw.md'
 
 # 联合断裂点（上一步产出）
 AGG_BREAKPOINTS = [
@@ -66,6 +67,7 @@ def section_lines(title: str, specs: list[WindowSpec], sorted_rows):
 
 
 def main():
+    OUT_DIR.mkdir(parents=True, exist_ok=True)
     features = read_analysis_features(str(ANALYSIS))
     sorted_rows = sort_features_by_date(features)
 
