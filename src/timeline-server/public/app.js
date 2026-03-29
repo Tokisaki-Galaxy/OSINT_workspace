@@ -326,7 +326,7 @@ function renderTimeline(items) {
     li.dataset.id = item.id;
     li.innerHTML = `
       <p class="item-title">${escapeHtml(item.title || item.id)}</p>
-      <div class="item-sub">${escapeHtml(item.createdText)} · ${escapeHtml(item.author || '未知作者')} · 点赞 ${escapeHtml(String(item.meta?.upvote_num ?? item.upvote ?? 0))}</div>
+      <div class="item-sub">${escapeHtml(item.createdText)} · 点赞 ${escapeHtml(String(item.meta?.upvote_num ?? item.upvote ?? 0))} · ${escapeHtml(item.author || '未知作者')}</div>
     `;
     li.addEventListener('click', () => selectArticle(item.id));
     refs.timelineList.appendChild(li);
