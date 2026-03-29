@@ -9,18 +9,6 @@
   },
   "rewrites": [
     {
-      "source": "/api/root-options",
-      "destination": "/api/root-options"
-    },
-    {
-      "source": "/api/timeline",
-      "destination": "/api/timeline"
-    },
-    {
-      "source": "/api/article",
-      "destination": "/api/article"
-    },
-    {
       "source": "/",
       "destination": "/src/timeline-server/public/index.html"
     },

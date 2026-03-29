@@ -21,6 +21,7 @@ let filteredItems = [];
 let activeId = '';
 let reloadTimer = null;
 let apiRootPath = '';
+const SVG_PLACEHOLDER_HTML = '<div class="md-image-placeholder" role="img" aria-label="图片已替换为占位图"><svg viewBox="0 0 420 180" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#e8f0ff"/><stop offset="100%" stop-color="#d9f6f2"/></linearGradient></defs><rect x="0" y="0" width="420" height="180" rx="16" fill="url(#g)"/><g fill="none" stroke="#6b7280" stroke-width="2.5"><rect x="38" y="38" width="344" height="104" rx="12"/><path d="M66 122l72-50 58 42 46-30 52 38"/><circle cx="123" cy="76" r="14"/></g><text x="210" y="156" text-anchor="middle" fill="#475569" font-size="14" font-family="Segoe UI, Arial">Image removed • 图片已移除</text></svg></div>';
 
 function escapeHtml(input) {
   return String(input)
@@ -124,7 +125,7 @@ function safeHref(href) {
 }
 
 function svgPlaceholder() {
-  return '<div class="md-image-placeholder" role="img" aria-label="图片已替换为占位图"><svg viewBox="0 0 420 180" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#e8f0ff"/><stop offset="100%" stop-color="#d9f6f2"/></linearGradient></defs><rect x="0" y="0" width="420" height="180" rx="16" fill="url(#g)"/><g fill="none" stroke="#6b7280" stroke-width="2.5"><rect x="38" y="38" width="344" height="104" rx="12"/><path d="M66 122l72-50 58 42 46-30 52 38"/><circle cx="123" cy="76" r="14"/></g><text x="210" y="156" text-anchor="middle" fill="#475569" font-size="14" font-family="Segoe UI, Arial">Image removed • 图片已移除</text></svg></div>';
+  return SVG_PLACEHOLDER_HTML;
 }
 
 function replaceImageBlocks(markdown) {
@@ -546,9 +547,13 @@ function debounceReload() {
   clearTimeout(reloadTimer);
   reloadTimer = setTimeout(() => {
     void reloadCurrentMode().catch((error) => {
-      refs.article.innerHTML = `<p class="empty-hint">加载失败：${escapeHtml(error.message || '未知错误')}</p>`;
+      handleLoadError(error, '加载失败');
     });
   }, 120);
+}
+
+function handleLoadError(error, prefix = '加载失败') {
+  refs.article.innerHTML = `<p class="empty-hint">${escapeHtml(prefix)}：${escapeHtml(error?.message || '未知错误')}</p>`;
 }
 
 refs.openDirBtn.addEventListener('click', () => {
@@ -558,7 +563,7 @@ refs.openDirBtn.addEventListener('click', () => {
 refs.dataMode.addEventListener('change', () => {
   setModeUi();
   void reloadCurrentMode().catch((error) => {
-    refs.article.innerHTML = `<p class="empty-hint">加载失败：${escapeHtml(error.message || '未知错误')}</p>`;
+    handleLoadError(error, '加载失败');
   });
 });
 
@@ -566,7 +571,7 @@ refs.apiRootSelect.addEventListener('change', () => {
   apiRootPath = refs.apiRootSelect.value;
   setDirLabelByMode();
   void readTimelineFromApi().catch((error) => {
-    refs.article.innerHTML = `<p class="empty-hint">加载失败：${escapeHtml(error.message || '未知错误')}</p>`;
+    handleLoadError(error, '加载失败');
   });
 });
 
@@ -581,7 +586,7 @@ async function init() {
     await loadRootOptionsFromApi();
     await readTimelineFromApi();
   } catch (error) {
-    refs.article.innerHTML = `<p class="empty-hint">API 初始化失败：${escapeHtml(error.message || '未知错误')}</p>`;
+    handleLoadError(error, 'API 初始化失败');
   }
 
   if (!fsAccessSupported && refs.dataMode.value === 'fs') {
