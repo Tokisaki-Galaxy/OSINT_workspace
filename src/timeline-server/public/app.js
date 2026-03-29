@@ -119,7 +119,7 @@ function safeHref(href) {
   }
 }
 
-function svgPlaceholder() {
+function imagePlaceholder() {
   return '<div class="md-image-placeholder" role="img" aria-label="图片已替换为占位文字">【🖼 图片已省略】</div>';
 }
 
@@ -148,7 +148,7 @@ function renderLineWithPlaceholders(line) {
   return line
     .split(marker)
     .map((chunk) => renderInline(chunk))
-    .join(svgPlaceholder());
+    .join(imagePlaceholder());
 }
 
 function renderMarkdown(markdown) {
@@ -183,7 +183,7 @@ function renderMarkdown(markdown) {
     }
 
     if (trimmed === '__IMG_PLACEHOLDER__') {
-      htmlBlocks.push(svgPlaceholder());
+      htmlBlocks.push(imagePlaceholder());
       i += 1;
       continue;
     }

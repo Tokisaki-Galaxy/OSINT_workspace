@@ -23,7 +23,7 @@ function safeHref(href) {
   return '#';
 }
 
-function svgPlaceholder() {
+function imagePlaceholder() {
   return `<div class="md-image-placeholder" role="img" aria-label="图片已替换为占位文字">【🖼 图片已省略】</div>`;
 }
 
@@ -55,7 +55,7 @@ function renderLineWithPlaceholders(line) {
   return line
     .split(marker)
     .map((chunk) => renderInline(chunk))
-    .join(svgPlaceholder());
+    .join(imagePlaceholder());
 }
 
 export function renderMarkdown(markdown) {
@@ -68,7 +68,7 @@ export function renderMarkdown(markdown) {
     if (!trimmed) continue;
 
     if (trimmed === '__IMG_PLACEHOLDER__') {
-      htmlBlocks.push(svgPlaceholder());
+      htmlBlocks.push(imagePlaceholder());
       continue;
     }
 
@@ -85,7 +85,7 @@ export function renderMarkdown(markdown) {
         .filter(Boolean)
         .map((line) => {
           if (line.trim() === '__IMG_PLACEHOLDER__') {
-            return `<li>${svgPlaceholder()}</li>`;
+            return `<li>${imagePlaceholder()}</li>`;
           }
           return `<li>${renderInline(line.replace(/^\s*[-*]\s+/, ''))}</li>`;
         })
