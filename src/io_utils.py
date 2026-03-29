@@ -42,7 +42,7 @@ def sort_features_by_date(rows: list[FeatureRow]) -> list[FeatureRow]:
 
 
 def load_markdown_body(path: str) -> str:
-    text = Path(path).read_text(encoding="utf-8", errors="ignore")
+    text = Path(path).read_text(encoding="utf-8", errors="replace")
     parts = text.split("---")
     if len(parts) >= 3:
         return "---".join(parts[2:]).strip()

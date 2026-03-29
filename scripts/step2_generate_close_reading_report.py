@@ -73,10 +73,12 @@ def render_block(specs: list[WindowSpec], sorted_rows, heading: str) -> list[str
                 break
         if split_at == 0:
             split_at = len(cards) // 2
+        if split_at >= len(cards):
+            split_at = max(1, len(cards) - 1)
 
         summary = summarize_shift([c for _, c in cards], split_at)
         pre_q = cards[max(0, split_at - 1)][1].quote if cards else '不确定'
-        post_q = cards[min(len(cards) - 1, split_at)][1].quote if cards else '不确定'
+        post_q = cards[split_at][1].quote if cards and split_at < len(cards) else '不确定'
 
         lines.append('')
         lines.append('变化摘要：')

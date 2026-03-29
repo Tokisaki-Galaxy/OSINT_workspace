@@ -34,6 +34,9 @@ def expand_window(spec: WindowSpec, min_idx: int, max_idx: int, radius_windows: 
 
 
 def pick_feature_rows(sorted_rows: list[FeatureRow], expanded: WindowExpanded) -> list[FeatureRow]:
+    """
+    Map 1-based window indices in WindowExpanded to 0-based Python list indices.
+    """
     selected = []
     for i in range(expanded.expanded_start, expanded.expanded_end + 1):
         selected.append(sorted_rows[i - 1])

@@ -53,7 +53,10 @@ def section_lines(title: str, specs: list[WindowSpec], sorted_rows):
             md_path = EXTRACTED / r.file_name
             body = load_markdown_body(str(md_path)) if md_path.exists() else '[[MISSING FILE]]'
             first_sentence = '不确定'
-            for ln in [x.strip() for x in body.splitlines() if x.strip() and not x.strip().startswith('![](')]:
+            for raw_ln in body.splitlines():
+                ln = raw_ln.strip()
+                if not ln or ln.startswith('![]('):
+                    continue
                 first_sentence = ln
                 break
             lines.append(f"- idx={r.index} | date={r.created_raw} | file={r.file_name}")
