@@ -617,6 +617,25 @@ function debounceReload() {
   }, 120);
 }
 
+function handleTimelineArrowNavigation(event) {
+  if (!filteredItems.length) return;
+  if (event.key !== 'ArrowUp' && event.key !== 'ArrowDown') return;
+  event.preventDefault();
+
+  const currentIndex = filteredItems.findIndex((item) => item.id === activeId);
+  if (currentIndex < 0) {
+    void selectArticle(filteredItems[0].id);
+    return;
+  }
+  const nextIndex = event.key === 'ArrowUp'
+    ? Math.max(0, currentIndex - 1)
+    : Math.min(filteredItems.length - 1, currentIndex + 1);
+  const nextItem = filteredItems[nextIndex];
+  if (nextItem && nextItem.id !== activeId) {
+    void selectArticle(nextItem.id);
+  }
+}
+
 refs.openDirBtn.addEventListener('click', () => {
   void openDirectory();
 });
@@ -641,24 +660,16 @@ for (const el of [refs.sort, refs.start, refs.end]) {
 refs.search.addEventListener('input', debounceReload);
 
 refs.timelineList.tabIndex = 0;
-refs.timelineList.addEventListener('keydown', (event) => {
-  if (!filteredItems.length) return;
-  if (event.key !== 'ArrowUp' && event.key !== 'ArrowDown') return;
-  event.preventDefault();
-
-  const currentIndex = filteredItems.findIndex((item) => item.id === activeId);
-  if (currentIndex < 0) {
-    void selectArticle(filteredItems[0].id);
-    return;
-  }
-  const nextIndex = event.key === 'ArrowUp'
-    ? Math.max(0, currentIndex - 1)
-    : Math.min(filteredItems.length - 1, currentIndex + 1);
-  const nextItem = filteredItems[nextIndex];
-  if (nextItem && nextItem.id !== activeId) {
-    void selectArticle(nextItem.id);
-  }
-});
+refs.timelineList.addEventListener('keydown', handleTimelineArrowNavigation);
+window.addEventListener(
+  'keydown',
+  (event) => {
+    const activeTag = document.activeElement?.tagName;
+    if (activeTag === 'INPUT' || activeTag === 'TEXTAREA' || activeTag === 'SELECT') return;
+    handleTimelineArrowNavigation(event);
+  },
+  { passive: false },
+);
 
 if (!fsAccessSupported) {
   refs.openDirBtn.disabled = true;
