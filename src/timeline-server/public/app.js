@@ -365,6 +365,10 @@ function renderAnalysisChart(items) {
   }
 
   const maxCount = points.reduce((max, p) => Math.max(max, p.count), 0);
+  if (maxCount <= 0) {
+    refs.analysisSummary.textContent = '没有可统计的有效日期数据';
+    return;
+  }
   refs.analysisSummary.textContent = `Y轴：文章量（共 ${points.length} 天，${items.length} 篇）`;
 
   for (const point of points) {
@@ -383,9 +387,12 @@ function renderAnalysisChart(items) {
       const target = findFirstItemByDate(point.date);
       if (!target) return;
       const targetNode = refs.timelineList.querySelector(`[data-id="${CSS.escape(target.id)}"]`);
-      if (targetNode) {
-        targetNode.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      if (!targetNode) {
+        void selectArticle(target.id);
+        highlightChartByDate(point.date);
+        return;
       }
+      targetNode.scrollIntoView({ behavior: 'smooth', block: 'center' });
       void selectArticle(target.id);
       highlightChartByDate(point.date);
     });
