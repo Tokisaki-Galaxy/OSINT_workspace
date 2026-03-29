@@ -16,6 +16,21 @@
 
         <div class="toolbar-right">
           <label class="field compact">
+            <span>数据来源</span>
+            <select id="data-mode">
+              <option value="api" selected>API 服务</option>
+              <option value="fs">本地目录</option>
+            </select>
+          </label>
+
+          <label id="api-root-field" class="field compact">
+            <span>数据根目录</span>
+            <select id="api-root-select">
+              <option value="">加载中...</option>
+            </select>
+          </label>
+
+          <label class="field compact">
             <span>排序</span>
             <select id="sort">
               <option value="desc">新 → 旧</option>

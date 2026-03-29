@@ -1,0 +1,47 @@
+{
+  "buildCommand": "echo no build",
+  "installCommand": "pnpm install --frozen-lockfile",
+  "framework": null,
+  "functions": {
+    "api/*.mjs": {
+      "runtime": "nodejs20.x"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/api/root-options",
+      "destination": "/api/root-options"
+    },
+    {
+      "source": "/api/timeline",
+      "destination": "/api/timeline"
+    },
+    {
+      "source": "/api/article",
+      "destination": "/api/article"
+    },
+    {
+      "source": "/",
+      "destination": "/src/timeline-server/public/index.html"
+    },
+    {
+      "source": "/app.js",
+      "destination": "/src/timeline-server/public/app.js"
+    },
+    {
+      "source": "/styles.css",
+      "destination": "/src/timeline-server/public/styles.css"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
+        }
+      ]
+    }
+  ]
+}

@@ -2,22 +2,38 @@
 
 ## Timeline Server
 
-- 本地调试：`pnpm run timeline:dev`（或 `pnpm run timeline:start`）
+- 本地运行完整服务（含 API + 页面）：`pnpm run timeline:dev`（或 `pnpm run timeline:start`）
+- 默认访问地址：`http://localhost:3986`
 
-## Vercel 控制台部署（推荐）
+## Vercel 部署完整服务（含 API）
 
-本项目时间线页面可作为静态站点部署，推荐直接连接 GitHub 仓库到 Vercel（不通过命令行 `vercel --prod`）。
+本项目已支持在 Vercel 以“静态页面 + API Functions”方式部署完整服务，不再是仅静态页面。
 
-在 Vercel 新建项目并导入本仓库后，Build & Output Settings 建议配置为：
+### 1) 在 Vercel 控制台连接 GitHub 仓库
+
+创建新项目并导入当前仓库后，建议配置：
 
 - Framework Preset：`Other`
 - Install Command：`pnpm install --frozen-lockfile`
-- Build Command：留空（或 `echo "no build"`）
-- Output Directory：`src/timeline-server/public`
-- Node.js Version：`20.x`（或与你本地一致的 LTS 版本）
+- Build Command：`echo no build`（或留空）
+- Output Directory：留空（由 `vercel.json` 接管）
+- Node.js Version：`20.x`
 
-### 说明
+### 2) 路由与 API
 
-- 当前时间线页面代码位于 `src/timeline-server/public`，是可直接托管的静态资源目录。
-- 页面使用浏览器 File System Access API 读取本地目录，不依赖服务端 API 即可运行。
-- 若未来需要部署 Node 服务端（`src/timeline-server/server.mjs`），需改为 Vercel Serverless/Functions 方案，届时不应继续使用上述静态输出目录配置。
+部署后可直接使用：
+
+- 页面：`/`
+- API：
+  - `/api/root-options`
+  - `/api/timeline`
+  - `/api/article`
+
+### 3) 数据模式说明
+
+前端支持两种模式：
+
+- `API 服务`（默认）：通过上述 API 读取服务端可见的数据目录
+- `本地目录`：使用浏览器 File System Access API 读取你本机目录
+
+> 若使用 `API 服务` 模式，请确保部署运行环境中存在目标数据目录，并可被服务端扫描到（目录下需有 `extracted_mds`）。

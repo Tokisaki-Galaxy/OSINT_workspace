@@ -79,6 +79,10 @@ body {
   flex-wrap: nowrap;
 }
 
+#api-root-field {
+  min-width: 220px;
+}
+
 .field {
   display: flex;
   flex-direction: column;

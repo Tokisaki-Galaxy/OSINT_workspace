@@ -1,6 +1,9 @@
 const refs = {
   openDirBtn: document.querySelector('#open-dir-btn'),
   dirLabel: document.querySelector('#dir-label'),
+  dataMode: document.querySelector('#data-mode'),
+  apiRootField: document.querySelector('#api-root-field'),
+  apiRootSelect: document.querySelector('#api-root-select'),
   sort: document.querySelector('#sort'),
   start: document.querySelector('#start'),
   end: document.querySelector('#end'),
@@ -17,6 +20,7 @@ let allItems = [];
 let filteredItems = [];
 let activeId = '';
 let reloadTimer = null;
+let apiRootPath = '';
 
 function escapeHtml(input) {
   return String(input)
@@ -336,6 +340,93 @@ function applyFilters() {
   renderTimeline(filteredItems);
 }
 
+async function fetchJsonOrThrow(url) {
+  const response = await fetch(url);
+  const payload = await response.json().catch(() => ({}));
+  if (!response.ok) {
+    const message = payload?.error || `请求失败: ${response.status}`;
+    throw new Error(message);
+  }
+  return payload;
+}
+
+function setDirLabelByMode() {
+  if (refs.dataMode.value === 'api') {
+    refs.dirLabel.textContent = apiRootPath ? `API 根目录：${apiRootPath}` : '请先选择 API 数据根目录';
+    return;
+  }
+  refs.dirLabel.textContent = selectedRootHandle
+    ? `已选择：${selectedRootHandle.name}${extractedDirHandle && extractedDirHandle !== selectedRootHandle ? '/extracted_mds' : ''}`
+    : '未选择目录';
+}
+
+async function loadRootOptionsFromApi() {
+  refs.apiRootSelect.innerHTML = '<option value="">加载中...</option>';
+  const data = await fetchJsonOrThrow('/api/root-options');
+  const options = Array.isArray(data.options) ? data.options : [];
+
+  if (!options.length) {
+    refs.apiRootSelect.innerHTML = '<option value="">无可用目录</option>';
+    apiRootPath = '';
+    setDirLabelByMode();
+    return;
+  }
+
+  refs.apiRootSelect.innerHTML = '';
+  for (const opt of options) {
+    const optionEl = document.createElement('option');
+    optionEl.value = opt;
+    optionEl.textContent = opt;
+    refs.apiRootSelect.appendChild(optionEl);
+  }
+
+  if (!apiRootPath || !options.includes(apiRootPath)) {
+    apiRootPath = options[0];
+  }
+  refs.apiRootSelect.value = apiRootPath;
+  setDirLabelByMode();
+}
+
+async function readTimelineFromApi() {
+  if (!apiRootPath) {
+    allItems = [];
+    applyFilters();
+    return;
+  }
+
+  const params = new URLSearchParams({
+    rootPath: apiRootPath,
+    sort: refs.sort.value,
+  });
+
+  const start = refs.start.value;
+  const end = refs.end.value;
+  if (start) params.set('start', start);
+  if (end) params.set('end', end);
+
+  const data = await fetchJsonOrThrow(`/api/timeline?${params.toString()}`);
+  const items = Array.isArray(data.items) ? data.items : [];
+  allItems = items.map((item) => ({
+    id: item.id,
+    title: item.title || item.id,
+    author: item.author || '未知作者',
+    createdText: item.created || '未知时间',
+    timestamp: Number.isFinite(item.timestamp) ? item.timestamp : null,
+    body: '',
+    searchBody: '',
+    meta: {
+      title: item.title || item.id,
+      author: item.author || '未提供',
+      created: item.created || '未提供',
+      url: '未提供',
+      upvote_num: '0',
+      comment_num: '0',
+    },
+  }));
+
+  applyFilters();
+}
+
 async function readTimelineFromDirectory() {
   if (!extractedDirHandle) return;
 
@@ -374,6 +465,21 @@ async function readTimelineFromDirectory() {
 async function selectArticle(id) {
   const item = filteredItems.find((v) => v.id === id) || allItems.find((v) => v.id === id);
   if (!item) return;
+
+  if (refs.dataMode.value === 'api') {
+    try {
+      const query = new URLSearchParams({ rootPath: apiRootPath, id: item.id });
+      const article = await fetchJsonOrThrow(`/api/article?${query.toString()}`);
+      markActive(item.id);
+      renderMeta(article.meta || item.meta, article.title || item.title);
+      refs.article.innerHTML = article.html || '<p class="empty-hint">文章内容为空</p>';
+      return;
+    } catch (error) {
+      refs.article.innerHTML = `<p class="empty-hint">读取文章失败：${escapeHtml(error.message || '未知错误')}</p>`;
+      return;
+    }
+  }
+
   markActive(item.id);
   renderMeta(item.meta, item.title);
   refs.article.innerHTML = renderMarkdown(item.body || '');
@@ -402,7 +508,7 @@ async function openDirectory() {
     }
 
     extractedDirHandle = target;
-    refs.dirLabel.textContent = `已选择：${selectedRootHandle.name}${target !== selectedRootHandle ? '/extracted_mds' : ''}`;
+    setDirLabelByMode();
     await readTimelineFromDirectory();
   } catch (error) {
     if (error?.name === 'AbortError') return;
@@ -417,11 +523,31 @@ async function openDirectory() {
   }
 }
 
+function setModeUi() {
+  const isApiMode = refs.dataMode.value === 'api';
+  refs.apiRootField.hidden = !isApiMode;
+  refs.openDirBtn.hidden = isApiMode;
+  if (!isApiMode && !fsAccessSupported) {
+    refs.openDirBtn.disabled = true;
+    refs.openDirBtn.textContent = '当前浏览器不支持';
+  }
+  setDirLabelByMode();
+}
+
+async function reloadCurrentMode() {
+  if (refs.dataMode.value === 'api') {
+    await readTimelineFromApi();
+  } else {
+    await readTimelineFromDirectory();
+  }
+}
+
 function debounceReload() {
   clearTimeout(reloadTimer);
   reloadTimer = setTimeout(() => {
-    if (!allItems.length) return;
-    applyFilters();
+    void reloadCurrentMode().catch((error) => {
+      refs.article.innerHTML = `<p class="empty-hint">加载失败：${escapeHtml(error.message || '未知错误')}</p>`;
+    });
   }, 120);
 }
 
@@ -429,13 +555,40 @@ refs.openDirBtn.addEventListener('click', () => {
   void openDirectory();
 });
 
+refs.dataMode.addEventListener('change', () => {
+  setModeUi();
+  void reloadCurrentMode().catch((error) => {
+    refs.article.innerHTML = `<p class="empty-hint">加载失败：${escapeHtml(error.message || '未知错误')}</p>`;
+  });
+});
+
+refs.apiRootSelect.addEventListener('change', () => {
+  apiRootPath = refs.apiRootSelect.value;
+  setDirLabelByMode();
+  void readTimelineFromApi().catch((error) => {
+    refs.article.innerHTML = `<p class="empty-hint">加载失败：${escapeHtml(error.message || '未知错误')}</p>`;
+  });
+});
+
 for (const el of [refs.sort, refs.start, refs.end]) {
   el.addEventListener('change', debounceReload);
 }
 refs.search.addEventListener('input', debounceReload);
 
-if (!fsAccessSupported) {
-  refs.openDirBtn.disabled = true;
-  refs.openDirBtn.textContent = '当前浏览器不支持';
-  refs.dirLabel.textContent = '请使用支持 File System Access API 的浏览器（如 Chrome、Edge）';
+async function init() {
+  setModeUi();
+  try {
+    await loadRootOptionsFromApi();
+    await readTimelineFromApi();
+  } catch (error) {
+    refs.article.innerHTML = `<p class="empty-hint">API 初始化失败：${escapeHtml(error.message || '未知错误')}</p>`;
+  }
+
+  if (!fsAccessSupported && refs.dataMode.value === 'fs') {
+    refs.openDirBtn.disabled = true;
+    refs.openDirBtn.textContent = '当前浏览器不支持';
+    refs.dirLabel.textContent = '请使用支持 File System Access API 的浏览器（如 Chrome、Edge）';
+  }
 }
+
+void init();
