@@ -22,6 +22,8 @@ let filteredItems = [];
 let activeId = '';
 let reloadTimer = null;
 let analysisVisible = false;
+const MIN_CHART_BAR_HEIGHT = 8;
+const MAX_CHART_BAR_HEIGHT = 150;
 
 function escapeHtml(input) {
   return String(input)
@@ -362,7 +364,7 @@ function renderAnalysisChart(items) {
     return;
   }
 
-  const maxCount = points.reduce((max, p) => Math.max(max, p.count), 1);
+  const maxCount = points.reduce((max, p) => Math.max(max, p.count), 0);
   refs.analysisSummary.textContent = `Y轴：文章量（共 ${points.length} 天，${items.length} 篇）`;
 
   for (const point of points) {
@@ -371,7 +373,10 @@ function renderAnalysisChart(items) {
     bar.className = 'chart-bar';
     bar.dataset.date = point.date;
     bar.dataset.active = 'false';
-    bar.style.height = `${Math.max(8, Math.round((point.count / maxCount) * 150))}px`;
+    bar.style.height = `${Math.max(
+      MIN_CHART_BAR_HEIGHT,
+      Math.round((point.count / maxCount) * MAX_CHART_BAR_HEIGHT),
+    )}px`;
     bar.title = `${point.date}：${point.count} 篇`;
     bar.setAttribute('aria-label', `${point.date}，文章量 ${point.count}`);
     bar.addEventListener('click', () => {
