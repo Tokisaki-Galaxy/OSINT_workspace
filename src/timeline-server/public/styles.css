@@ -341,6 +341,83 @@ button:focus-visible {
   white-space: normal;
 }
 
+.secondary-btn {
+  height: 38px;
+  border: 1px solid #d1d5db;
+  padding: 0 16px;
+  background: #fff;
+  color: var(--text);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.secondary-btn:hover {
+  background: #f9fafb;
+}
+
+.analysis-panel {
+  padding: 12px 14px;
+}
+
+.analysis-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.analysis-head h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.analysis-summary {
+  margin: 0;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.analysis-chart {
+  display: flex;
+  align-items: end;
+  gap: 6px;
+  height: 180px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 22px;
+}
+
+.chart-bar {
+  width: 16px;
+  min-width: 16px;
+  border: none;
+  border-radius: 6px 6px 0 0;
+  background: #94a3b8;
+  cursor: pointer;
+  position: relative;
+}
+
+.chart-bar:hover,
+.chart-bar:focus-visible {
+  background: #64748b;
+}
+
+.chart-bar::after {
+  content: attr(data-date);
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 10px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.chart-bar[data-active='true'] {
+  background: #111827;
+}
+
 @media (max-width: 1200px) {
   .toolbar {
     flex-direction: column;

@@ -1,10 +1,14 @@
 const refs = {
   openDirBtn: document.querySelector('#open-dir-btn'),
+  analysisBtn: document.querySelector('#analysis-btn'),
   dirLabel: document.querySelector('#dir-label'),
   sort: document.querySelector('#sort'),
   start: document.querySelector('#start'),
   end: document.querySelector('#end'),
   search: document.querySelector('#search'),
+  analysisPanel: document.querySelector('#analysis-panel'),
+  analysisSummary: document.querySelector('#analysis-summary'),
+  analysisChart: document.querySelector('#analysis-chart'),
   timelineList: document.querySelector('#timeline-list'),
   meta: document.querySelector('#meta'),
   article: document.querySelector('#article'),
@@ -17,6 +21,7 @@ let allItems = [];
 let filteredItems = [];
 let activeId = '';
 let reloadTimer = null;
+let analysisVisible = false;
 
 function escapeHtml(input) {
   return String(input)
@@ -53,6 +58,13 @@ function formatTs(ts) {
   const d = new Date(ts);
   const pad = (n) => String(n).padStart(2, '0');
   return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
+}
+
+function formatDateOnly(ts) {
+  if (ts === null || ts === undefined || Number.isNaN(ts)) return '';
+  const d = new Date(ts);
+  const pad = (n) => String(n).padStart(2, '0');
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
 }
 
 function toInputDateTs(inputValue) {
@@ -317,6 +329,70 @@ function renderTimeline(items) {
   void selectArticle(selected.id);
 }
 
+function findFirstItemByDate(dateText) {
+  return filteredItems.find((item) => formatDateOnly(item.timestamp) === dateText) || null;
+}
+
+function highlightChartByDate(dateText) {
+  for (const bar of refs.analysisChart.querySelectorAll('.chart-bar')) {
+    bar.dataset.active = bar.dataset.date === dateText ? 'true' : 'false';
+  }
+}
+
+function renderAnalysisChart(items) {
+  refs.analysisChart.innerHTML = '';
+  if (!items.length) {
+    refs.analysisSummary.textContent = '当前筛选条件下暂无数据';
+    return;
+  }
+
+  const countMap = new Map();
+  for (const item of items) {
+    const dateText = formatDateOnly(item.timestamp);
+    if (!dateText) continue;
+    countMap.set(dateText, (countMap.get(dateText) || 0) + 1);
+  }
+
+  const points = [...countMap.entries()]
+    .map(([date, count]) => ({ date, count }))
+    .sort((a, b) => a.date.localeCompare(b.date));
+
+  if (!points.length) {
+    refs.analysisSummary.textContent = '没有可统计的有效日期数据';
+    return;
+  }
+
+  const maxCount = points.reduce((max, p) => Math.max(max, p.count), 1);
+  refs.analysisSummary.textContent = `Y轴：文章量（共 ${points.length} 天，${items.length} 篇）`;
+
+  for (const point of points) {
+    const bar = document.createElement('button');
+    bar.type = 'button';
+    bar.className = 'chart-bar';
+    bar.dataset.date = point.date;
+    bar.dataset.active = 'false';
+    bar.style.height = `${Math.max(8, Math.round((point.count / maxCount) * 150))}px`;
+    bar.title = `${point.date}：${point.count} 篇`;
+    bar.setAttribute('aria-label', `${point.date}，文章量 ${point.count}`);
+    bar.addEventListener('click', () => {
+      const target = findFirstItemByDate(point.date);
+      if (!target) return;
+      const targetNode = refs.timelineList.querySelector(`[data-id="${CSS.escape(target.id)}"]`);
+      if (targetNode) {
+        targetNode.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      void selectArticle(target.id);
+      highlightChartByDate(point.date);
+    });
+    refs.analysisChart.appendChild(bar);
+  }
+
+  const current = filteredItems.find((item) => item.id === activeId);
+  if (current) {
+    highlightChartByDate(formatDateOnly(current.timestamp));
+  }
+}
+
 function applyFilters() {
   const startTs = toInputDateTs(refs.start.value);
   const endTs = toInputDateTs(refs.end.value);
@@ -363,6 +439,9 @@ function applyFilters() {
     });
 
   renderTimeline(filteredItems);
+  if (analysisVisible) {
+    renderAnalysisChart(filteredItems);
+  }
 }
 
 async function readTimelineFromDirectory() {
@@ -405,12 +484,16 @@ async function selectArticle(id) {
   const item = filteredItems.find((v) => v.id === id) || allItems.find((v) => v.id === id);
   if (!item) return;
   markActive(item.id);
+  if (analysisVisible) {
+    highlightChartByDate(formatDateOnly(item.timestamp));
+  }
   renderMeta(item.meta, item.title);
   refs.article.innerHTML = renderMarkdown(item.body || '');
 }
 
 function setLoading(isLoading) {
   refs.openDirBtn.disabled = isLoading;
+  refs.analysisBtn.disabled = isLoading;
   refs.openDirBtn.textContent = isLoading ? '读取中...' : '打开目录';
 }
 
@@ -457,6 +540,15 @@ function debounceReload() {
 
 refs.openDirBtn.addEventListener('click', () => {
   void openDirectory();
+});
+
+refs.analysisBtn.addEventListener('click', () => {
+  analysisVisible = !analysisVisible;
+  refs.analysisPanel.hidden = !analysisVisible;
+  refs.analysisBtn.textContent = analysisVisible ? '收起分析' : '分析';
+  if (analysisVisible) {
+    renderAnalysisChart(filteredItems);
+  }
 });
 
 for (const el of [refs.sort, refs.start, refs.end]) {
