@@ -3,50 +3,57 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Timeline Browser</title>
+    <title>时间线浏览器</title>
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
-    <header class="topbar">
-      <h1>时间线浏览器</h1>
-      <p>Fluent 风格 · Node.js 24</p>
-    </header>
+    <div class="app-shell">
+      <header class="toolbar card">
+        <div class="toolbar-left">
+          <h1>时间线浏览器</h1>
+          <span id="dir-label" class="dir-label">未选择目录</span>
+        </div>
 
-    <section class="controls card">
-      <div class="control-row">
-        <label for="root-options">候选目录</label>
-        <select id="root-options"></select>
-        <button id="use-option" type="button">使用候选</button>
-      </div>
-      <div class="control-row">
-        <label for="root-path">根目录（绝对路径）</label>
-        <input id="root-path" type="text" placeholder="例如 /home/.../雨苔" />
-        <button id="load-btn" type="button">加载时间线</button>
-      </div>
-      <div class="control-row">
-        <label for="sort">排序</label>
-        <select id="sort">
-          <option value="desc">倒序（新→旧）</option>
-          <option value="asc">正序（旧→新）</option>
-        </select>
-        <label for="start">开始</label>
-        <input id="start" type="datetime-local" step="1" />
-        <label for="end">结束</label>
-        <input id="end" type="datetime-local" step="1" />
-      </div>
-    </section>
+        <div class="toolbar-right">
+          <label class="field compact">
+            <span>排序</span>
+            <select id="sort">
+              <option value="desc">新 → 旧</option>
+              <option value="asc">旧 → 新</option>
+            </select>
+          </label>
 
-    <main class="layout">
-      <aside class="timeline card">
-        <div class="timeline-title">时间线 - 问题标题</div>
-        <ul id="timeline-list"></ul>
-      </aside>
+          <label class="field compact">
+            <span>开始</span>
+            <input id="start" type="datetime-local" />
+          </label>
 
-      <article class="content card">
-        <section id="meta" class="meta"></section>
-        <section id="article" class="article">请选择左侧文章</section>
-      </article>
-    </main>
+          <label class="field compact">
+            <span>结束</span>
+            <input id="end" type="datetime-local" />
+          </label>
+
+          <button id="open-dir-btn" type="button" class="primary-btn">打开目录</button>
+        </div>
+      </header>
+
+      <main class="main-layout">
+        <aside class="left-pane card">
+          <div class="left-head">
+            <h2>时间线</h2>
+            <input id="search" type="search" placeholder="搜索标题 / 作者 / 关键词" />
+          </div>
+          <ul id="timeline-list" class="timeline-list"></ul>
+        </aside>
+
+        <article class="right-pane card">
+          <section id="meta" class="meta-wrap"></section>
+          <section id="article" class="article markdown-body">
+            <p class="empty-hint">请选择左侧文章</p>
+          </section>
+        </article>
+      </main>
+    </div>
 
     <script type="module" src="/app.js"></script>
   </body>
