@@ -151,6 +151,7 @@ function renderLineWithPlaceholders(line) {
 }
 
 function renderMarkdown(markdown) {
+  const isCodeFence = (input) => /^```/.test(input.trim());
   const withMarkers = replaceImageBlocks(markdown);
   const lines = withMarkers.replace(/\r\n/g, '\n').split('\n');
   const htmlBlocks = [];
@@ -165,11 +166,11 @@ function renderMarkdown(markdown) {
       continue;
     }
 
-    if (/^```/.test(trimmed)) {
+    if (isCodeFence(trimmed)) {
       const lang = trimmed.slice(3).trim();
       const codeLines = [];
       i += 1;
-      while (i < lines.length && !/^```/.test(lines[i].trim())) {
+      while (i < lines.length && !isCodeFence(lines[i])) {
         codeLines.push(lines[i]);
         i += 1;
       }
@@ -216,7 +217,7 @@ function renderMarkdown(markdown) {
 
     const para = [line];
     i += 1;
-    while (i < lines.length && lines[i].trim() && !/^```/.test(lines[i].trim())) {
+    while (i < lines.length && lines[i].trim() && !isCodeFence(lines[i])) {
       if (/^(#{1,6})\s+/.test(lines[i].trim()) || /^\s*[-*]\s+/.test(lines[i]) || /^>\s?/.test(lines[i].trim())) {
         break;
       }
@@ -381,7 +382,7 @@ function setLoading(isLoading) {
 
 async function openDirectory() {
   if (!fsAccessSupported) {
-    alert('当前浏览器不支持 File System Access API，请在 Windows Chrome 中使用。');
+    alert('当前浏览器不支持 File System Access API，请使用支持该能力的浏览器（如 Chrome、Edge）。');
     return;
   }
 
@@ -428,5 +429,5 @@ refs.search.addEventListener('input', debounceReload);
 if (!fsAccessSupported) {
   refs.openDirBtn.disabled = true;
   refs.openDirBtn.textContent = '当前浏览器不支持';
-  refs.dirLabel.textContent = '请在 Windows Chrome 中打开（需要 File System Access API）';
+  refs.dirLabel.textContent = '请使用支持 File System Access API 的浏览器（如 Chrome、Edge）';
 }
