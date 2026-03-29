@@ -289,6 +289,10 @@ function markActive(id) {
   for (const el of refs.timelineList.querySelectorAll('.timeline-item')) {
     el.classList.toggle('active', el.dataset.id === id);
   }
+  const activeEl = refs.timelineList.querySelector('.timeline-item.active');
+  if (activeEl) {
+    activeEl.scrollIntoView({ block: 'nearest' });
+  }
 }
 
 function renderTimeline(items) {
@@ -307,7 +311,7 @@ function renderTimeline(items) {
     li.dataset.id = item.id;
     li.innerHTML = `
       <p class="item-title">${escapeHtml(item.title || item.id)}</p>
-      <div class="item-sub">${escapeHtml(item.createdText)} · ${escapeHtml(item.author || '未知作者')}</div>
+      <div class="item-sub">${escapeHtml(item.createdText)} · ${escapeHtml(item.author || '未知作者')} · 点赞 ${escapeHtml(String(item.meta?.upvote_num ?? item.upvote ?? 0))}</div>
     `;
     li.addEventListener('click', () => selectArticle(item.id));
     refs.timelineList.appendChild(li);
@@ -463,6 +467,23 @@ for (const el of [refs.sort, refs.start, refs.end]) {
   el.addEventListener('change', debounceReload);
 }
 refs.search.addEventListener('input', debounceReload);
+
+refs.timelineList.tabIndex = 0;
+refs.timelineList.addEventListener('keydown', (event) => {
+  if (!filteredItems.length) return;
+  if (event.key !== 'ArrowUp' && event.key !== 'ArrowDown') return;
+  event.preventDefault();
+
+  const currentIndex = filteredItems.findIndex((item) => item.id === activeId);
+  const fallbackIndex = currentIndex >= 0 ? currentIndex : 0;
+  const nextIndex = event.key === 'ArrowUp'
+    ? Math.max(0, fallbackIndex - 1)
+    : Math.min(filteredItems.length - 1, fallbackIndex + 1);
+  const nextItem = filteredItems[nextIndex];
+  if (nextItem && nextItem.id !== activeId) {
+    void selectArticle(nextItem.id);
+  }
+});
 
 if (!fsAccessSupported) {
   refs.openDirBtn.disabled = true;
