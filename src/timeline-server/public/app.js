@@ -104,7 +104,9 @@ function formatYearOnly(ts) {
 }
 
 function getCurrentGranularity() {
-  return refs.analysisGranularity.value;
+  const value = refs.analysisGranularity.value;
+  if (value === 'day' || value === 'month' || value === 'year') return value;
+  throw new Error(`不支持的统计粒度：${value}`);
 }
 
 function getGranularityUnit(granularity) {
@@ -113,7 +115,11 @@ function getGranularityUnit(granularity) {
     month: '月',
     year: '年',
   };
-  return unitMap[granularity] || '天';
+  const unit = unitMap[granularity];
+  if (!unit) {
+    throw new Error(`不支持的统计粒度单位映射：${granularity}`);
+  }
+  return unit;
 }
 
 function toInputDateTs(inputValue) {
