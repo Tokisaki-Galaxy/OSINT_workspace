@@ -8,11 +8,22 @@ const refs = {
   search: document.querySelector('#search'),
   analysisPanel: document.querySelector('#analysis-panel'),
   analysisSummary: document.querySelector('#analysis-summary'),
+  analysisGranularity: document.querySelector('#analysis-granularity'),
   analysisChart: document.querySelector('#analysis-chart'),
   timelineList: document.querySelector('#timeline-list'),
   meta: document.querySelector('#meta'),
   article: document.querySelector('#article'),
 };
+
+function ensureRequiredRefs() {
+  for (const [key, value] of Object.entries(refs)) {
+    if (!value) {
+      throw new Error(`必需元素未找到：${key}`);
+    }
+  }
+}
+
+ensureRequiredRefs();
 
 const fsAccessSupported = typeof window.showDirectoryPicker === 'function';
 let selectedRootHandle = null;
@@ -24,6 +35,7 @@ let reloadTimer = null;
 let analysisVisible = false;
 const MIN_CHART_BAR_HEIGHT = 8;
 const MAX_CHART_BAR_HEIGHT = 150;
+const VALID_GRANULARITIES = ['day', 'month', 'year'];
 
 function escapeHtml(input) {
   return String(input)
@@ -68,6 +80,40 @@ function formatDateOnly(ts) {
   if (Number.isNaN(d.getTime())) return '';
   const pad = (n) => String(n).padStart(2, '0');
   return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+}
+
+function formatMonthOnly(ts) {
+  if (ts === null || ts === undefined || Number.isNaN(ts)) return '';
+  const d = new Date(ts);
+  if (Number.isNaN(d.getTime())) return '';
+  const pad = (n) => String(n).padStart(2, '0');
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}`;
+}
+
+function formatYearOnly(ts) {
+  if (ts === null || ts === undefined || Number.isNaN(ts)) return '';
+  const d = new Date(ts);
+  if (Number.isNaN(d.getTime())) return '';
+  return String(d.getFullYear());
+}
+
+function getCurrentGranularity() {
+  const value = refs.analysisGranularity.value;
+  if (VALID_GRANULARITIES.includes(value)) return value;
+  throw new Error(`不支持的统计粒度：${value}`);
+}
+
+function getGranularityUnit(granularity) {
+  const unitMap = {
+    day: '天',
+    month: '月',
+    year: '年',
+  };
+  const unit = unitMap[granularity];
+  if (!unit) {
+    throw new Error(`不支持的统计粒度单位映射：${granularity}`);
+  }
+  return unit;
 }
 
 function toInputDateTs(inputValue) {
@@ -336,13 +382,20 @@ function renderTimeline(items) {
   void selectArticle(selected.id);
 }
 
-function findFirstItemByDate(dateText) {
-  return filteredItems.find((item) => formatDateOnly(item.timestamp) === dateText) || null;
+function getBucketLabelByItem(item) {
+  const granularity = getCurrentGranularity();
+  if (granularity === 'year') return formatYearOnly(item.timestamp);
+  if (granularity === 'month') return formatMonthOnly(item.timestamp);
+  return formatDateOnly(item.timestamp);
 }
 
-function highlightChartByDate(dateText) {
+function findFirstItemByBucket(bucketText) {
+  return filteredItems.find((item) => getBucketLabelByItem(item) === bucketText) || null;
+}
+
+function highlightChartByBucket(bucketText) {
   for (const bar of refs.analysisChart.querySelectorAll('.chart-bar')) {
-    bar.dataset.active = bar.dataset.date === dateText ? 'true' : 'false';
+    bar.dataset.active = bar.dataset.bucket === bucketText ? 'true' : 'false';
   }
 }
 
@@ -361,15 +414,16 @@ function renderAnalysisChart(items) {
   }
 
   const countMap = new Map();
+  const granularity = getCurrentGranularity();
   for (const item of items) {
-    const dateText = formatDateOnly(item.timestamp);
-    if (!dateText) continue;
-    countMap.set(dateText, (countMap.get(dateText) || 0) + 1);
+    const bucket = getBucketLabelByItem(item);
+    if (!bucket) continue;
+    countMap.set(bucket, (countMap.get(bucket) || 0) + 1);
   }
 
   const points = [...countMap.entries()]
-    .map(([date, count]) => ({ date, count }))
-    .sort((a, b) => a.date.localeCompare(b.date));
+    .map(([bucket, count]) => ({ bucket, count }))
+    .sort((a, b) => a.bucket.localeCompare(b.bucket));
 
   if (!points.length) {
     refs.analysisSummary.textContent = '没有可统计的有效日期数据';
@@ -381,39 +435,40 @@ function renderAnalysisChart(items) {
     refs.analysisSummary.textContent = '没有可统计的有效日期数据';
     return;
   }
-  refs.analysisSummary.textContent = `Y轴：文章量（共 ${points.length} 天，${items.length} 篇）`;
+  const unit = getGranularityUnit(granularity);
+  refs.analysisSummary.textContent = `Y轴：文章量（共 ${points.length} ${unit}，${items.length} 篇）`;
 
   for (const point of points) {
     const bar = document.createElement('button');
     bar.type = 'button';
     bar.className = 'chart-bar';
-    bar.dataset.date = point.date;
+    bar.dataset.bucket = point.bucket;
     bar.dataset.active = 'false';
     bar.style.height = `${Math.max(
       MIN_CHART_BAR_HEIGHT,
       Math.round((point.count / maxCount) * MAX_CHART_BAR_HEIGHT),
     )}px`;
-    bar.title = `${point.date}：${point.count} 篇`;
-    bar.setAttribute('aria-label', `${point.date}，文章量 ${point.count}`);
+    bar.title = `${point.bucket}：${point.count} 篇`;
+    bar.setAttribute('aria-label', `${point.bucket}，文章量 ${point.count}`);
     bar.addEventListener('click', () => {
-      const target = findFirstItemByDate(point.date);
+      const target = findFirstItemByBucket(point.bucket);
       if (!target) return;
       const targetNode = findTimelineNodeById(target.id);
       if (!targetNode) {
         void selectArticle(target.id);
-        highlightChartByDate(point.date);
+        highlightChartByBucket(point.bucket);
         return;
       }
       targetNode.scrollIntoView({ behavior: 'smooth', block: 'center' });
       void selectArticle(target.id);
-      highlightChartByDate(point.date);
+      highlightChartByBucket(point.bucket);
     });
     refs.analysisChart.appendChild(bar);
   }
 
   const current = filteredItems.find((item) => item.id === activeId);
   if (current) {
-    highlightChartByDate(formatDateOnly(current.timestamp));
+    highlightChartByBucket(getBucketLabelByItem(current));
   }
 }
 
@@ -509,7 +564,7 @@ async function selectArticle(id) {
   if (!item) return;
   markActive(item.id);
   if (analysisVisible) {
-    highlightChartByDate(formatDateOnly(item.timestamp));
+    highlightChartByBucket(getBucketLabelByItem(item));
   }
   renderMeta(item.meta, item.title);
   refs.article.innerHTML = renderMarkdown(item.body || '');
@@ -573,6 +628,11 @@ refs.analysisBtn.addEventListener('click', () => {
   if (analysisVisible) {
     renderAnalysisChart(filteredItems);
   }
+});
+
+refs.analysisGranularity.addEventListener('change', () => {
+  if (!analysisVisible) return;
+  renderAnalysisChart(filteredItems);
 });
 
 for (const el of [refs.sort, refs.start, refs.end]) {
