@@ -44,9 +44,21 @@
       <section id="analysis-panel" class="analysis-panel card" hidden>
         <div class="analysis-head">
           <h2>时间堆积图</h2>
-          <p id="analysis-summary" class="analysis-summary">按日期统计文章量</p>
+          <div class="analysis-controls">
+            <label class="field compact analysis-granularity">
+              <span>统计粒度</span>
+              <select id="analysis-granularity">
+                <option value="day">按日</option>
+                <option value="month">按月</option>
+                <option value="year">按年</option>
+              </select>
+            </label>
+            <p id="analysis-summary" class="analysis-summary">按日期统计文章量</p>
+          </div>
         </div>
-        <div id="analysis-chart" class="analysis-chart"></div>
+        <div class="analysis-chart-wrap">
+          <div id="analysis-chart" class="analysis-chart"></div>
+        </div>
       </section>
 
       <main class="main-layout">

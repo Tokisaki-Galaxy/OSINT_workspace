@@ -366,7 +366,7 @@ button:focus-visible {
 
 .analysis-head {
   display: flex;
-  align-items: baseline;
+  align-items: flex-end;
   justify-content: space-between;
   gap: 10px;
   margin-bottom: 10px;
@@ -381,6 +381,24 @@ button:focus-visible {
   margin: 0;
   font-size: 12px;
   color: var(--muted);
+  white-space: nowrap;
+}
+
+.analysis-controls {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.analysis-granularity select {
+  min-width: 96px;
+}
+
+.analysis-chart-wrap {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 6px;
 }
 
 .analysis-chart {
@@ -388,8 +406,9 @@ button:focus-visible {
   align-items: end;
   gap: 6px;
   height: 180px;
-  overflow-x: auto;
-  overflow-y: hidden;
+  width: max-content;
+  min-width: 100%;
+  overflow: visible;
   padding-bottom: 22px;
 }
 
@@ -409,7 +428,7 @@ button:focus-visible {
 }
 
 .chart-bar::after {
-  content: attr(data-date);
+  content: attr(data-bucket);
   position: absolute;
   bottom: -20px;
   left: 50%;
@@ -436,5 +455,16 @@ button:focus-visible {
 
   .dir-label {
     max-width: 100%;
+  }
+
+  .analysis-head {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .analysis-controls {
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
   }
 }
