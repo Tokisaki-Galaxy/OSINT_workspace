@@ -1,4 +1,6 @@
 const refs = {
+  leftPane: document.querySelector('.left-pane'),
+  rightPane: document.querySelector('.right-pane'),
   openDirBtn: document.querySelector('#open-dir-btn'),
   analysisBtn: document.querySelector('#analysis-btn'),
   dirLabel: document.querySelector('#dir-label'),
@@ -666,6 +668,17 @@ function handleTimelineArrowNavigation(event) {
   }
 }
 
+function isFormField(element) {
+  if (!element) return false;
+  const tag = element.tagName?.toLowerCase();
+  return (
+    tag === 'input'
+    || tag === 'textarea'
+    || tag === 'select'
+    || element.isContentEditable
+  );
+}
+
 refs.openDirBtn.addEventListener('click', () => {
   void openDirectory();
 });
@@ -690,13 +703,23 @@ for (const el of [refs.sort, refs.start, refs.end]) {
 refs.search.addEventListener('input', debounceReload);
 
 refs.timelineList.tabIndex = 0;
-refs.timelineList.addEventListener('keydown', handleTimelineArrowNavigation);
+refs.rightPane.tabIndex = 0;
+refs.article.tabIndex = 0;
+refs.timelineList.addEventListener('click', () => {
+  refs.timelineList.focus({ preventScroll: true });
+});
+refs.rightPane.addEventListener('click', () => {
+  refs.rightPane.focus({ preventScroll: true });
+});
 window.addEventListener(
   'keydown',
   (event) => {
-    const activeTag = document.activeElement?.tagName;
-    if (activeTag === 'INPUT' || activeTag === 'TEXTAREA' || activeTag === 'SELECT') return;
-    handleTimelineArrowNavigation(event);
+    if (event.key !== 'ArrowUp' && event.key !== 'ArrowDown') return;
+    const activeElement = document.activeElement;
+    if (isFormField(activeElement)) return;
+    if (refs.leftPane.contains(activeElement)) {
+      handleTimelineArrowNavigation(event);
+    }
   },
   { passive: false },
 );
